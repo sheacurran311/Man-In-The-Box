@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import AIHologramFigure from "./ai-hologram-figure";
+import CubeFurniture from "./cube-furniture";
 
 interface CubeVisualizationProps {
   aiState: {
@@ -56,13 +57,24 @@ export default function CubeVisualization({ aiState }: CubeVisualizationProps) {
           transition={{ duration: isRotating ? 2 : 0.1, ease: "easeOut" }}
         >
           <div className="cube-face">
+            <CubeFurniture />
             <AIHologramFigure />
           </div>
-          <div className="cube-face"></div>
-          <div className="cube-face"></div>
-          <div className="cube-face"></div>
-          <div className="cube-face"></div>
-          <div className="cube-face"></div>
+          <div className="cube-face">
+            <CubeFurniture />
+          </div>
+          <div className="cube-face">
+            <CubeFurniture />
+          </div>
+          <div className="cube-face">
+            <CubeFurniture />
+          </div>
+          <div className="cube-face">
+            <CubeFurniture />
+          </div>
+          <div className="cube-face">
+            <CubeFurniture />
+          </div>
         </motion.div>
       </div>
       

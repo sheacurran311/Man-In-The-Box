@@ -154,33 +154,32 @@ export default function AIHologramFigure({ className = "" }: AIHologramFigurePro
 
       case "sleeping":
         return (
-          <g>
-            {/* Head - lying down */}
-            <ellipse cx="45" cy="35" rx="7" ry="6" transform="rotate(-90 45 35)" {...baseProps} />
+          <g transform="translate(30, 10)">
+            {/* Sleeping on the bed */}
+            {/* Head - lying down on pillow */}
+            <ellipse cx="35" cy="25" rx="6" ry="5" transform="rotate(-10 35 25)" {...baseProps} />
             {/* Neck */}
-            <rect x="52" y="33" width="3" height="4" rx="2" {...baseProps} />
-            {/* Torso - horizontal */}
-            <ellipse cx="70" cy="35" rx="18" ry="10" {...baseProps} />
+            <rect x="41" y="23" width="3" height="4" rx="2" {...baseProps} />
+            {/* Torso - horizontal on mattress */}
+            <ellipse cx="55" cy="25" rx="16" ry="8" {...baseProps} />
             {/* Pelvis - horizontal */}
-            <ellipse cx="85" cy="38" rx="8" ry="6" {...baseProps} />
+            <ellipse cx="68" cy="28" rx="7" ry="5" {...baseProps} />
             
-            {/* Arms - relaxed, lying down */}
-            <ellipse cx="65" cy="25" rx="10" ry="4" {...baseProps} />
-            <ellipse cx="75" cy="22" rx="8" ry="3" {...baseProps} />
-            <ellipse cx="65" cy="45" rx="10" ry="4" {...baseProps} />
-            <ellipse cx="75" cy="48" rx="8" ry="3" {...baseProps} />
+            {/* Arms - one under pillow, one relaxed */}
+            <ellipse cx="50" cy="18" rx="8" ry="3" {...baseProps} />
+            <ellipse cx="50" cy="32" rx="8" ry="3" {...baseProps} />
             
-            {/* Legs - bent, lying down */}
-            <ellipse cx="95" cy="30" rx="12" ry="5" {...baseProps} />
-            <ellipse cx="95" cy="46" rx="12" ry="5" {...baseProps} />
-            <ellipse cx="105" cy="25" rx="8" ry="4" {...baseProps} />
-            <ellipse cx="105" cy="51" rx="8" ry="4" {...baseProps} />
+            {/* Legs - bent naturally on bed */}
+            <ellipse cx="78" cy="22" rx="10" ry="4" {...baseProps} />
+            <ellipse cx="78" cy="34" rx="10" ry="4" {...baseProps} />
+            <ellipse cx="86" cy="18" rx="6" ry="3" {...baseProps} />
+            <ellipse cx="86" cy="38" rx="6" ry="3" {...baseProps} />
             
             {/* Breathing animation */}
             <motion.ellipse 
-              cx="70" cy="35" rx="18" ry="10"
+              cx="55" cy="25" rx="16" ry="8"
               animate={{ 
-                ry: [10, 11, 10],
+                ry: [8, 9, 8],
                 fillOpacity: [0.6, 0.7, 0.6]
               }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -192,41 +191,42 @@ export default function AIHologramFigure({ className = "" }: AIHologramFigurePro
               animate={{ opacity: [0, 1, 0] }}
               transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
             >
-              <text x="30" y="20" fontSize="8" fill="currentColor" opacity="0.8">Z</text>
-              <text x="25" y="15" fontSize="6" fill="currentColor" opacity="0.6">z</text>
-              <text x="35" y="12" fontSize="4" fill="currentColor" opacity="0.4">z</text>
+              <text x="15" y="15" fontSize="6" fill="currentColor" opacity="0.8">Z</text>
+              <text x="12" y="10" fontSize="4" fill="currentColor" opacity="0.6">z</text>
+              <text x="18" y="8" fontSize="3" fill="currentColor" opacity="0.4">z</text>
             </motion.g>
           </g>
         );
 
       case "brushing":
         return (
-          <g>
+          <g transform="translate(50, 20)">
+            {/* Standing at the sink */}
             {/* Head */}
-            <ellipse cx="60" cy="18" rx="6" ry="7" {...baseProps} />
+            <ellipse cx="30" cy="8" rx="5" ry="6" {...baseProps} />
             {/* Neck */}
-            <rect x="58" y="25" width="4" height="3" rx="2" {...baseProps} />
+            <rect x="28" y="14" width="4" height="3" rx="2" {...baseProps} />
             {/* Torso */}
-            <ellipse cx="60" cy="45" rx="12" ry="18" {...baseProps} />
+            <ellipse cx="30" cy="32" rx="10" ry="15" {...baseProps} />
             {/* Pelvis */}
-            <ellipse cx="60" cy="65" rx="8" ry="6" {...baseProps} />
+            <ellipse cx="30" cy="50" rx="7" ry="5" {...baseProps} />
             
             {/* Left arm - animated brushing motion */}
             <motion.g
               animate={{ 
                 rotate: [0, -15, 5, -15, 0],
-                transformOrigin: "48px 35px"
+                transformOrigin: "20px 25px"
               }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             >
-              <ellipse cx="48" cy="35" rx="4" ry="10" {...baseProps} />
-              <ellipse cx="42" cy="25" rx="3" ry="6" {...baseProps} />
+              <ellipse cx="20" cy="25" rx="3" ry="8" {...baseProps} />
+              <ellipse cx="15" cy="15" rx="2" ry="5" {...baseProps} />
               {/* Toothbrush */}
               <motion.rect 
-                x="38" y="19" width="2" height="8" rx="1"
+                x="12" y="10" width="1.5" height="6" rx="1"
                 animate={{ 
                   rotate: [0, 10, -10, 10, 0],
-                  transformOrigin: "39px 23px"
+                  transformOrigin: "12.5px 13px"
                 }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                 {...baseProps}
@@ -234,15 +234,15 @@ export default function AIHologramFigure({ className = "" }: AIHologramFigurePro
               />
             </motion.g>
             
-            {/* Right arm - relaxed */}
-            <ellipse cx="72" cy="38" rx="4" ry="12" {...baseProps} />
-            <ellipse cx="75" cy="55" rx="3" ry="8" {...baseProps} />
+            {/* Right arm - resting on sink */}
+            <ellipse cx="38" cy="28" rx="3" ry="8" {...baseProps} />
+            <ellipse cx="42" cy="38" rx="2" ry="5" {...baseProps} />
             
             {/* Legs - standing */}
-            <ellipse cx="55" cy="78" rx="5" ry="15" {...baseProps} />
-            <ellipse cx="65" cy="78" rx="5" ry="15" {...baseProps} />
-            <ellipse cx="53" cy="95" rx="4" ry="6" {...baseProps} />
-            <ellipse cx="67" cy="95" rx="4" ry="6" {...baseProps} />
+            <ellipse cx="26" cy="62" rx="4" ry="12" {...baseProps} />
+            <ellipse cx="34" cy="62" rx="4" ry="12" {...baseProps} />
+            <ellipse cx="25" cy="76" rx="3" ry="4" {...baseProps} />
+            <ellipse cx="35" cy="76" rx="3" ry="4" {...baseProps} />
           </g>
         );
 
