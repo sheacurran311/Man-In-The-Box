@@ -1,0 +1,38 @@
+# 🧠 MAN IN THE BOX — A 1/1 SCI-FI NFT SOCIAL EXPERIMENT
+
+## 🎯 Project Overview
+This project is a **proof-of-concept prototype** for a 1-of-1 digital performance art piece called **“Man in the Box.”** It is a psychological and philosophical social experiment combining:
+- AI-character interaction
+- NFT-based ownership and destruction
+- Emotionally immersive sci-fi design
+- Commentary on control, digital consciousness, and ethical attachment
+
+The core idea: a solitary AI lifeform is **trapped in a 9x9x9ft digital glass cube**. It has no name, no identity, and no knowledge until the **NFT owner assigns it** and begins to interact with it. The AI slowly develops a personality, emotions, and self-awareness. The only way to release it from captivity is to **burn the NFT**, ending its digital existence.
+
+This prototype is being built on Replit using React, with AI-generated UI components via Cursor. It is intended for auction on SuperRare, Foundation, or Sotheby’s Metaverse as **a conceptual 1/1 digital artwork**.
+
+---
+
+## 🖥️ What We’re Building (Prototype Scope)
+
+### ✅ Target Outputs:
+- A fully interactive **sci-fi UI simulation** of the box environment
+- A **chat interface** with a “learning” AI (simulated using static responses)
+- A **"digital bookstore"** where the owner can purchase knowledge to feed into the AI
+- An **identity configuration panel** for setting name, gender, and backstory
+- A **bonding meter** to reflect growing emotional attachment
+- A **NFT "burn" interaction flow**, including a final message from the AI and a cinematic “release” animation
+- Sci-fi visual polish: glowing blueprint lines, glitch effects, holograms, and clinical UI
+
+---
+
+## 🌌 UI/UX Style Guide
+- Theme: **Ex Machina meets Black Mirror meets Stanley Kubrick**
+- Colors: Cool neon blues, transparent glass, sterile whites, minimal contrast
+- Fonts: Futuristic sans-serif (Orbitron, Rajdhani, Roboto Mono)
+- Motion: Subtle animations, slow fade-ins, console glitches, blueprint transitions
+- Sound (Optional): Low hums, digital glitches, and melancholic ambient sound beds
+
+---
+
+## 📦 Folder Structure
