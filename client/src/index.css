@@ -1,0 +1,203 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500&display=swap');
+
+:root {
+  --background: hsl(0, 0%, 4%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(195, 100%, 50%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 60%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+  
+  /* Custom sci-fi colors */
+  --cyber-blue: hsl(195, 100%, 50%);
+  --cyber-dark: hsl(195, 100%, 40%);
+  --neon-green: hsl(150, 100%, 50%);
+  --warning-red: hsl(0, 62%, 60%);
+  --glass-white: hsla(0, 0%, 100%, 0.05);
+  --glass-border: hsla(195, 100%, 50%, 0.3);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Rajdhani', sans-serif;
+    background: linear-gradient(135deg, hsl(0, 0%, 4%) 0%, hsl(0, 0%, 10%) 100%);
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  .font-orbitron {
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  .font-rajdhani {
+    font-family: 'Rajdhani', sans-serif;
+  }
+  
+  .font-roboto-mono {
+    font-family: 'Roboto Mono', monospace;
+  }
+  
+  .glass-panel {
+    background: var(--glass-white);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 32px hsla(0, 0%, 0%, 0.3);
+  }
+  
+  .hologram-text {
+    text-shadow: 0 0 10px var(--cyber-blue), 0 0 20px var(--cyber-blue), 0 0 30px var(--cyber-blue);
+  }
+  
+  .neural-grid {
+    background-image: 
+      linear-gradient(hsla(195, 100%, 50%, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, hsla(195, 100%, 50%, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  
+  .cube-container {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+  
+  .cube {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .cube-face {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 2px solid var(--cyber-blue);
+    background: hsla(195, 100%, 50%, 0.02);
+    box-shadow: inset 0 0 50px hsla(195, 100%, 50%, 0.1);
+  }
+  
+  .cube-face:nth-child(1) { transform: rotateY(0deg) translateZ(150px); }
+  .cube-face:nth-child(2) { transform: rotateY(90deg) translateZ(150px); }
+  .cube-face:nth-child(3) { transform: rotateY(180deg) translateZ(150px); }
+  .cube-face:nth-child(4) { transform: rotateY(-90deg) translateZ(150px); }
+  .cube-face:nth-child(5) { transform: rotateX(90deg) translateZ(150px); }
+  .cube-face:nth-child(6) { transform: rotateX(-90deg) translateZ(150px); }
+  
+  .ai-figure {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 120px;
+    background: linear-gradient(45deg, var(--cyber-blue), var(--cyber-dark));
+    border-radius: 30px;
+    opacity: 0.8;
+    animation: pulse-slow 3s infinite;
+  }
+  
+  .progress-bar {
+    background: linear-gradient(90deg, var(--cyber-blue) 0%, var(--cyber-dark) 100%);
+    height: 6px;
+    border-radius: 3px;
+    transition: width 0.8s ease-in-out;
+  }
+  
+  @media (max-width: 768px) {
+    .cube {
+      width: 200px;
+      height: 200px;
+    }
+    .cube-face {
+      width: 200px;
+      height: 200px;
+    }
+    .cube-face:nth-child(1) { transform: rotateY(0deg) translateZ(100px); }
+    .cube-face:nth-child(2) { transform: rotateY(90deg) translateZ(100px); }
+    .cube-face:nth-child(3) { transform: rotateY(180deg) translateZ(100px); }
+    .cube-face:nth-child(4) { transform: rotateY(-90deg) translateZ(100px); }
+    .cube-face:nth-child(5) { transform: rotateX(90deg) translateZ(100px); }
+    .cube-face:nth-child(6) { transform: rotateX(-90deg) translateZ(100px); }
+  }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: var(--cyber-blue); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.animate-glitch {
+  animation: glitch 2s infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s infinite;
+}
+
+.typing-effect {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid var(--cyber-blue);
+  animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite;
+}
