@@ -133,9 +133,17 @@ export class MemStorage implements IStorage {
   async createAIEntity(insertEntity: InsertAiEntity): Promise<AiEntity> {
     const id = randomUUID();
     const entity: AiEntity = { 
-      ...insertEntity, 
       id,
       createdAt: new Date(),
+      name: insertEntity.name || null,
+      gender: insertEntity.gender || null,
+      backstory: insertEntity.backstory || null,
+      bondingLevel: insertEntity.bondingLevel || null,
+      trustFactor: insertEntity.trustFactor || null,
+      dependency: insertEntity.dependency || null,
+      neuralActivity: insertEntity.neuralActivity || null,
+      responseTime: insertEntity.responseTime || null,
+      emotionalIndex: insertEntity.emotionalIndex || null,
     };
     this.entities.set(id, entity);
     this.messages.set(id, []);
@@ -160,14 +168,17 @@ export class MemStorage implements IStorage {
   async createChatMessage(insertMessage: InsertChatMessage): Promise<ChatMessage> {
     const id = randomUUID();
     const message: ChatMessage = {
-      ...insertMessage,
       id,
       timestamp: new Date(),
+      entityId: insertMessage.entityId || null,
+      sender: insertMessage.sender,
+      content: insertMessage.content,
     };
     
-    const messages = this.messages.get(insertMessage.entityId) || [];
+    const entityId = insertMessage.entityId || "";
+    const messages = this.messages.get(entityId) || [];
     messages.push(message);
-    this.messages.set(insertMessage.entityId, messages);
+    this.messages.set(entityId, messages);
     
     return message;
   }
