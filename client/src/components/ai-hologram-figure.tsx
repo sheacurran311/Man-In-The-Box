@@ -77,9 +77,10 @@ export default function AIHologramFigure({ className = "" }: AIHologramFigurePro
 
   const getSVGContent = (action: Action) => {
     const baseProps = {
-      fill: "none",
+      fill: "currentColor",
+      fillOpacity: "0.6",
       stroke: "currentColor",
-      strokeWidth: "1.5",
+      strokeWidth: "1",
       strokeLinecap: "round" as const,
       strokeLinejoin: "round" as const,
     };
@@ -89,60 +90,111 @@ export default function AIHologramFigure({ className = "" }: AIHologramFigurePro
         return (
           <g>
             {/* Head */}
-            <circle cx="60" cy="20" r="8" {...baseProps} />
-            {/* Body */}
-            <line x1="60" y1="28" x2="60" y2="70" {...baseProps} />
+            <ellipse cx="60" cy="18" rx="6" ry="7" {...baseProps} />
+            {/* Neck */}
+            <rect x="58" y="25" width="4" height="3" rx="2" {...baseProps} />
+            {/* Torso */}
+            <ellipse cx="60" cy="45" rx="12" ry="18" {...baseProps} />
+            {/* Pelvis */}
+            <ellipse cx="60" cy="65" rx="8" ry="6" {...baseProps} />
+            
             {/* Arms - animated for walking */}
-            <motion.line 
-              x1="60" y1="40" x2="45" y2="55" 
-              animate={{ x2: [45, 50, 45], y2: [55, 50, 55] }}
+            <motion.g
+              animate={{ 
+                rotate: [0, 15, -15, 0],
+                transformOrigin: "60px 35px"
+              }}
               transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
-              {...baseProps} 
-            />
-            <motion.line 
-              x1="60" y1="40" x2="75" y2="55" 
-              animate={{ x2: [75, 70, 75], y2: [55, 50, 55] }}
+            >
+              {/* Left arm */}
+              <ellipse cx="48" cy="38" rx="4" ry="12" {...baseProps} />
+              <ellipse cx="45" cy="55" rx="3" ry="8" {...baseProps} />
+            </motion.g>
+            
+            <motion.g
+              animate={{ 
+                rotate: [0, -15, 15, 0],
+                transformOrigin: "72px 35px"
+              }}
               transition={{ duration: 1, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              {...baseProps} 
-            />
+            >
+              {/* Right arm */}
+              <ellipse cx="72" cy="38" rx="4" ry="12" {...baseProps} />
+              <ellipse cx="75" cy="55" rx="3" ry="8" {...baseProps} />
+            </motion.g>
+            
             {/* Legs - animated for walking */}
-            <motion.line 
-              x1="60" y1="70" x2="50" y2="90" 
-              animate={{ x2: [50, 55, 50], y2: [90, 85, 90] }}
+            <motion.g
+              animate={{ 
+                rotate: [0, -10, 10, 0],
+                transformOrigin: "55px 65px"
+              }}
               transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
-              {...baseProps} 
-            />
-            <motion.line 
-              x1="60" y1="70" x2="70" y2="90" 
-              animate={{ x2: [70, 65, 70], y2: [90, 85, 90] }}
+            >
+              {/* Left thigh */}
+              <ellipse cx="55" cy="75" rx="5" ry="12" {...baseProps} />
+              {/* Left calf */}
+              <ellipse cx="52" cy="90" rx="4" ry="10" {...baseProps} />
+            </motion.g>
+            
+            <motion.g
+              animate={{ 
+                rotate: [0, 10, -10, 0],
+                transformOrigin: "65px 65px"
+              }}
               transition={{ duration: 1, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              {...baseProps} 
-            />
+            >
+              {/* Right thigh */}
+              <ellipse cx="65" cy="75" rx="5" ry="12" {...baseProps} />
+              {/* Right calf */}
+              <ellipse cx="68" cy="90" rx="4" ry="10" {...baseProps} />
+            </motion.g>
           </g>
         );
 
       case "sleeping":
         return (
           <g>
-            {/* Head - tilted for sleeping */}
-            <ellipse cx="60" cy="25" rx="8" ry="6" {...baseProps} />
-            {/* Body - lying down */}
-            <line x1="68" y1="25" x2="90" y2="30" {...baseProps} />
-            {/* Arms - relaxed */}
-            <line x1="75" y1="28" x2="70" y2="40" {...baseProps} />
-            <line x1="85" y1="29" x2="90" y2="40" {...baseProps} />
-            {/* Legs - bent */}
-            <line x1="90" y1="30" x2="85" y2="45" {...baseProps} />
-            <line x1="85" y1="45" x2="80" y2="50" {...baseProps} />
-            <line x1="90" y1="30" x2="95" y2="45" {...baseProps} />
-            <line x1="95" y1="45" x2="100" y2="50" {...baseProps} />
+            {/* Head - lying down */}
+            <ellipse cx="45" cy="35" rx="7" ry="6" transform="rotate(-90 45 35)" {...baseProps} />
+            {/* Neck */}
+            <rect x="52" y="33" width="3" height="4" rx="2" {...baseProps} />
+            {/* Torso - horizontal */}
+            <ellipse cx="70" cy="35" rx="18" ry="10" {...baseProps} />
+            {/* Pelvis - horizontal */}
+            <ellipse cx="85" cy="38" rx="8" ry="6" {...baseProps} />
+            
+            {/* Arms - relaxed, lying down */}
+            <ellipse cx="65" cy="25" rx="10" ry="4" {...baseProps} />
+            <ellipse cx="75" cy="22" rx="8" ry="3" {...baseProps} />
+            <ellipse cx="65" cy="45" rx="10" ry="4" {...baseProps} />
+            <ellipse cx="75" cy="48" rx="8" ry="3" {...baseProps} />
+            
+            {/* Legs - bent, lying down */}
+            <ellipse cx="95" cy="30" rx="12" ry="5" {...baseProps} />
+            <ellipse cx="95" cy="46" rx="12" ry="5" {...baseProps} />
+            <ellipse cx="105" cy="25" rx="8" ry="4" {...baseProps} />
+            <ellipse cx="105" cy="51" rx="8" ry="4" {...baseProps} />
+            
+            {/* Breathing animation */}
+            <motion.ellipse 
+              cx="70" cy="35" rx="18" ry="10"
+              animate={{ 
+                ry: [10, 11, 10],
+                fillOpacity: [0.6, 0.7, 0.6]
+              }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              {...baseProps} 
+            />
+            
             {/* Z's for sleeping */}
             <motion.g
               animate={{ opacity: [0, 1, 0] }}
               transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
             >
-              <text x="45" y="15" fontSize="8" fill="currentColor">Z</text>
-              <text x="40" y="10" fontSize="6" fill="currentColor">z</text>
+              <text x="30" y="20" fontSize="8" fill="currentColor" opacity="0.8">Z</text>
+              <text x="25" y="15" fontSize="6" fill="currentColor" opacity="0.6">z</text>
+              <text x="35" y="12" fontSize="4" fill="currentColor" opacity="0.4">z</text>
             </motion.g>
           </g>
         );
@@ -151,28 +203,46 @@ export default function AIHologramFigure({ className = "" }: AIHologramFigurePro
         return (
           <g>
             {/* Head */}
-            <circle cx="60" cy="20" r="8" {...baseProps} />
-            {/* Body */}
-            <line x1="60" y1="28" x2="60" y2="70" {...baseProps} />
-            {/* Left arm - holding brush */}
-            <motion.line 
-              x1="60" y1="40" x2="45" y2="25" 
-              animate={{ x2: [45, 50, 45], y2: [25, 20, 25] }}
-              transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
-              {...baseProps} 
-            />
-            {/* Brush */}
-            <motion.rect 
-              x="42" y="22" width="6" height="2" rx="1"
-              animate={{ x: [42, 47, 42], y: [22, 17, 22] }}
-              transition={{ duration: 0.8, repeat: Infinity, ease: "easeInOut" }}
-              {...baseProps} 
-            />
-            {/* Right arm - down */}
-            <line x1="60" y1="40" x2="75" y2="55" {...baseProps} />
-            {/* Legs */}
-            <line x1="60" y1="70" x2="50" y2="90" {...baseProps} />
-            <line x1="60" y1="70" x2="70" y2="90" {...baseProps} />
+            <ellipse cx="60" cy="18" rx="6" ry="7" {...baseProps} />
+            {/* Neck */}
+            <rect x="58" y="25" width="4" height="3" rx="2" {...baseProps} />
+            {/* Torso */}
+            <ellipse cx="60" cy="45" rx="12" ry="18" {...baseProps} />
+            {/* Pelvis */}
+            <ellipse cx="60" cy="65" rx="8" ry="6" {...baseProps} />
+            
+            {/* Left arm - animated brushing motion */}
+            <motion.g
+              animate={{ 
+                rotate: [0, -15, 5, -15, 0],
+                transformOrigin: "48px 35px"
+              }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <ellipse cx="48" cy="35" rx="4" ry="10" {...baseProps} />
+              <ellipse cx="42" cy="25" rx="3" ry="6" {...baseProps} />
+              {/* Toothbrush */}
+              <motion.rect 
+                x="38" y="19" width="2" height="8" rx="1"
+                animate={{ 
+                  rotate: [0, 10, -10, 10, 0],
+                  transformOrigin: "39px 23px"
+                }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                {...baseProps}
+                fillOpacity="0.8"
+              />
+            </motion.g>
+            
+            {/* Right arm - relaxed */}
+            <ellipse cx="72" cy="38" rx="4" ry="12" {...baseProps} />
+            <ellipse cx="75" cy="55" rx="3" ry="8" {...baseProps} />
+            
+            {/* Legs - standing */}
+            <ellipse cx="55" cy="78" rx="5" ry="15" {...baseProps} />
+            <ellipse cx="65" cy="78" rx="5" ry="15" {...baseProps} />
+            <ellipse cx="53" cy="95" rx="4" ry="6" {...baseProps} />
+            <ellipse cx="67" cy="95" rx="4" ry="6" {...baseProps} />
           </g>
         );
 
@@ -180,19 +250,45 @@ export default function AIHologramFigure({ className = "" }: AIHologramFigurePro
         return (
           <g>
             {/* Head */}
-            <circle cx="60" cy="20" r="8" {...baseProps} />
-            {/* Body */}
-            <line x1="60" y1="28" x2="60" y2="60" {...baseProps} />
-            {/* Arms - relaxed */}
-            <line x1="60" y1="40" x2="45" y2="50" {...baseProps} />
-            <line x1="60" y1="40" x2="75" y2="50" {...baseProps} />
-            {/* Legs - sitting position */}
-            <line x1="60" y1="60" x2="50" y2="75" {...baseProps} />
-            <line x1="50" y1="75" x2="45" y2="80" {...baseProps} />
-            <line x1="60" y1="60" x2="70" y2="75" {...baseProps} />
-            <line x1="70" y1="75" x2="75" y2="80" {...baseProps} />
+            <ellipse cx="60" cy="18" rx="6" ry="7" {...baseProps} />
+            {/* Neck */}
+            <rect x="58" y="25" width="4" height="3" rx="2" {...baseProps} />
+            {/* Torso */}
+            <ellipse cx="60" cy="42" rx="12" ry="16" {...baseProps} />
+            {/* Pelvis - sitting */}
+            <ellipse cx="60" cy="60" rx="10" ry="6" {...baseProps} />
+            
+            {/* Arms - relaxed sitting */}
+            <ellipse cx="48" cy="35" rx="4" ry="10" {...baseProps} />
+            <ellipse cx="42" cy="50" rx="3" ry="8" {...baseProps} />
+            <ellipse cx="72" cy="35" rx="4" ry="10" {...baseProps} />
+            <ellipse cx="78" cy="50" rx="3" ry="8" {...baseProps} />
+            
+            {/* Thighs - sitting position */}
+            <ellipse cx="54" cy="70" rx="4" ry="12" {...baseProps} />
+            <ellipse cx="66" cy="70" rx="4" ry="12" {...baseProps} />
+            
+            {/* Calves - hanging down */}
+            <ellipse cx="52" cy="85" rx="3" ry="10" {...baseProps} />
+            <ellipse cx="68" cy="85" rx="3" ry="10" {...baseProps} />
+            
+            {/* Feet */}
+            <ellipse cx="51" cy="96" rx="2" ry="4" {...baseProps} />
+            <ellipse cx="69" cy="96" rx="2" ry="4" {...baseProps} />
+            
             {/* Seat/Platform */}
-            <line x1="40" y1="80" x2="80" y2="80" {...baseProps} strokeWidth="2" />
+            <rect x="40" y="78" width="40" height="4" rx="2" {...baseProps} strokeWidth="0" fillOpacity="0.4" />
+            
+            {/* Gentle breathing/idle animation */}
+            <motion.ellipse 
+              cx="60" cy="42" rx="12" ry="16"
+              animate={{ 
+                ry: [16, 17, 16],
+                fillOpacity: [0.6, 0.65, 0.6]
+              }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              {...baseProps} 
+            />
           </g>
         );
     }
