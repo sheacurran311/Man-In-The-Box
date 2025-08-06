@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import AIHologramFigure from "./ai-hologram-figure";
 
 interface CubeVisualizationProps {
   aiState: {
@@ -55,20 +56,7 @@ export default function CubeVisualization({ aiState }: CubeVisualizationProps) {
           transition={{ duration: isRotating ? 2 : 0.1, ease: "easeOut" }}
         >
           <div className="cube-face">
-            <motion.div 
-              className="ai-figure"
-              animate={{
-                opacity: [0.8, 1, 0.8],
-                scale: [1, 1.05, 1]
-              }}
-              transition={{ 
-                duration: 3, 
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-cyber-blue rounded-full opacity-60"></div>
-            </motion.div>
+            <AIHologramFigure />
           </div>
           <div className="cube-face"></div>
           <div className="cube-face"></div>
