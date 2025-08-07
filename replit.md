@@ -17,15 +17,28 @@ The experience is deliberately non-gamified, focusing on moral weight and emotio
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes
+
+**January 2025 - Landing Pages Implementation:**
+- Created comprehensive `/visitor-landing` page explaining the experiment to public observers
+- Built detailed `/owner` preview showcasing owner-exclusive interface and responsibilities
+- Implemented `/visitor` observer-only view with limited access simulation
+- Updated routing: Root `/` now shows visitor landing, `/app` hosts the main application
+- Added psychological warnings and ethical responsibility frameworks
+- Integrated live UI/UX previews of intelligence progression and bonding systems
+
 ## System Architecture
 
 ### Frontend Architecture
 The application uses a modern React-based stack with TypeScript for type safety. The UI is built with shadcn/ui components providing a consistent design system, while Tailwind CSS handles styling with custom sci-fi themed colors and animations. The component architecture is organized into specialized modules:
 
 - **Core Components**: Chat interface, cube visualization, control panel, knowledge store, and destruction protocol
+- **Intelligence Systems**: Emotional IQ and Knowledge IQ progression tracking with real-time metrics
+- **Owner Dashboard**: Psychological bonding analysis, private observation panels, ethical responsibility frameworks
+- **Landing Pages**: Separate visitor/owner landing experiences with comprehensive project explanations
 - **UI System**: Complete shadcn/ui component library with custom sci-fi theming
-- **State Management**: Custom hooks for AI state management with real-time updates
-- **Routing**: Wouter for lightweight client-side routing
+- **State Management**: Custom hooks for AI state management and intelligence tracking with real-time updates
+- **Routing**: Wouter for lightweight client-side routing with multi-page architecture
 - **Animations**: Framer Motion for smooth transitions and sci-fi effects
 
 ### Backend Architecture
