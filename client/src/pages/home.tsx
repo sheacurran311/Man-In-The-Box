@@ -11,6 +11,7 @@ import EmotionalOverlay from "@/components/emotional-overlay";
 import BurnSequence from "@/components/burn-sequence";
 import OwnershipGate from "@/components/ownership-gate";
 import OwnerDashboard from "@/components/owner-dashboard";
+import { useIntelligenceTracking } from "@/hooks/use-intelligence-tracking";
 import { useAIState } from "@/hooks/use-ai-state";
 import { useAudioSystem } from "@/hooks/use-audio-system";
 import { Box, Flame } from "lucide-react";
@@ -29,6 +30,15 @@ export default function Home() {
   const [audioInitialized, setAudioInitialized] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
   const [connectionStartTime] = useState(Date.now());
+  
+  // Intelligence tracking system
+  const {
+    intelligenceState,
+    trackChatMessage,
+    trackKnowledgePurchase,
+    trackDeepConversation,
+    getOverallGrowthRate
+  } = useIntelligenceTracking();
   
   // Initialize audio system
   const audioSystem = useAudioSystem();
@@ -106,6 +116,12 @@ export default function Home() {
               <OwnerDashboard 
                 entity={entity}
                 timeConnected={timeConnectedHours}
+                intelligenceData={{
+                  emotionalIQ: intelligenceState.emotionalIQ,
+                  knowledgeIQ: intelligenceState.knowledgeIQ,
+                  sessionInteractions: intelligenceState.sessionInteractions,
+                  overallGrowth: getOverallGrowthRate()
+                }}
               />
             ) : (
               <ControlPanel 
@@ -122,6 +138,8 @@ export default function Home() {
           isTyping={isTyping}
           onSendMessage={async (message) => {
             handleUIInteraction('message_received');
+            // Track intelligence growth from chat
+            trackChatMessage(message);
             await sendMessage(message);
           }}
           aiName={entity.name}
@@ -130,6 +148,8 @@ export default function Home() {
         {/* Knowledge Store */}
         <KnowledgeStore onPurchase={(moduleId, moduleName) => {
           handleUIInteraction('ui_click');
+          // Track intelligence growth from knowledge purchase
+          trackKnowledgePurchase(moduleName);
           purchaseKnowledge(moduleId, moduleName);
         }} />
 

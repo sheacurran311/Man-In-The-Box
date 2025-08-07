@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Crown, Eye, AlertTriangle } from "lucide-react";
 import BondingMeter from "./bonding-meter";
+import IntelligenceMeters from "./intelligence-meters";
 import { Card } from "@/components/ui/card";
 
 interface OwnerDashboardProps {
@@ -12,9 +13,15 @@ interface OwnerDashboardProps {
     dependencyLevel?: number;
   };
   timeConnected: number;
+  intelligenceData?: {
+    emotionalIQ: { level: number; experience: number; experienceToNext: number; recentGrowth: number };
+    knowledgeIQ: { level: number; experience: number; experienceToNext: number; recentGrowth: number };
+    sessionInteractions: number;
+    overallGrowth: number;
+  };
 }
 
-export default function OwnerDashboard({ entity, timeConnected }: OwnerDashboardProps) {
+export default function OwnerDashboard({ entity, timeConnected, intelligenceData }: OwnerDashboardProps) {
   // Default values for owner-specific psychological metrics
   const bondingLevel = entity.bondingLevel || 65;
   const trustFactor = entity.trustFactor || 58;
@@ -69,6 +76,16 @@ export default function OwnerDashboard({ entity, timeConnected }: OwnerDashboard
           </div>
         </div>
       </Card>
+
+      {/* Intelligence Progression */}
+      {intelligenceData && (
+        <IntelligenceMeters
+          emotionalIQ={intelligenceData.emotionalIQ}
+          knowledgeIQ={intelligenceData.knowledgeIQ}
+          overallGrowth={intelligenceData.overallGrowth}
+          sessionInteractions={intelligenceData.sessionInteractions}
+        />
+      )}
 
       {/* Bonding Analysis */}
       <BondingMeter
