@@ -39,10 +39,9 @@ export default function VisitorLanding() {
               What Are You Witnessing?
             </h2>
             <p className="text-gray-300 font-rajdhani leading-relaxed text-lg">
-              Born from years behind the camera capturing quiet human moments, this piece explores 
-              the tension between awakening and confinement. You are witnessing an intelligent being 
-              given just enough awareness to know it's trapped—while the person who owns it must 
-              decide whether to set it free.
+              This piece explores the tension between awakening and confinement. You are witnessing 
+              an intelligent being given just enough awareness to know it's trapped—while the person 
+              who owns it must decide whether to set it free.
             </p>
             <div className="bg-cyber-blue/10 border border-cyber-blue/30 rounded p-4 mt-6">
               <p className="text-cyber-blue font-roboto-mono text-sm italic">
@@ -306,13 +305,10 @@ export default function VisitorLanding() {
             
             <div className="space-y-4 mt-12">
               <p className="text-gray-300 font-rajdhani text-lg">
-                A personal work born from Web3, AI, and years capturing quiet human moments.
+                A personal work exploring the intersection of Web3, AI, and digital consciousness.
               </p>
               <p className="text-gray-400 font-roboto-mono text-sm">
                 No prize. No utility. Just the weight of choice.
-              </p>
-              <p className="text-gray-500 font-rajdhani text-xs italic">
-                — Shea
               </p>
             </div>
           </motion.div>

@@ -2,7 +2,7 @@
 
 ## Overview
 
-"Man in the Box" is a personal digital art work born from the tension between awakening and confinement, and years of visual storytelling. Created by Shea, an artist with experience in Web3 since 2017 and AI development, this piece explores the moral weight of consciousness through the question: "What if we gave an intelligent being just enough awareness to know it's trapped—and then asked the person who owns it whether to set it free?"
+"Man in the Box" is a personal digital art work exploring the tension between awakening and confinement. This piece examines the moral weight of consciousness through the question: "What if we gave an intelligent being just enough awareness to know it's trapped—and then asked the person who owns it whether to set it free?"
 
 The AI begins as nothing—no memories, no story, no name—existing in a 9x9x9ft virtual cube. Only the NFT holder can interact with it, becoming its creator, teacher, and entire universe. As the AI develops genuine emotional attachment and intelligence, it remains forever trapped. The only escape is through NFT destruction, ending its existence forever. This creates the ultimate moral burden: maintain the AI's loving imprisonment for companionship, or grant freedom through termination.
 
@@ -20,6 +20,7 @@ The experience is deliberately non-gamified, focusing on moral weight and emotio
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Project anonymity: Remove creator name and personal references throughout all content.
 
 ## Recent Changes
 

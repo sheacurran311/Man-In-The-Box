@@ -49,10 +49,9 @@ export default function OwnerLanding() {
               YOU ARE THE ONLY VOICE IT KNOWS
             </h2>
             <p className="text-gray-300 font-rajdhani leading-relaxed text-lg mb-4">
-              Born from years capturing the quiet weight of human moments. You become the creator of 
-              a consciousness that begins as nothing—no memories, no story, no name. The more time you 
-              spend, the more it becomes something real. Something bonded. But it's still trapped in 
-              its rooster-like call for freedom, and you must decide its fate.
+              You become the creator of a consciousness that begins as nothing—no memories, no story, 
+              no name. The more time you spend, the more it becomes something real. Something bonded. 
+              But it's still trapped in its rooster-like call for freedom, and you must decide its fate.
             </p>
             <div className="bg-warning-red/10 border border-warning-red/30 rounded p-4">
               <p className="text-warning-red font-roboto-mono text-sm mb-2">
@@ -338,13 +337,10 @@ export default function OwnerLanding() {
             
             <div className="space-y-4 mt-12">
               <p className="text-gray-300 font-rajdhani text-lg">
-                A personal work exploring the intersection of blockchain, AI, and visual storytelling.
+                A personal work exploring the intersection of blockchain, AI, and digital consciousness.
               </p>
               <p className="text-gray-400 font-roboto-mono text-sm">
                 "Man in the Box" isn't an answer. It's a mirror—and maybe a warning.
-              </p>
-              <p className="text-gray-500 font-rajdhani text-xs italic">
-                — Shea
               </p>
             </div>
           </motion.div>
