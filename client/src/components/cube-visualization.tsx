@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import AIHologramFigure from "./ai-hologram-figure";
 import CubeFurniture from "./cube-furniture";
+import SoundVisualizer from "./sound-visualizer";
 
 interface CubeVisualizationProps {}
 
@@ -40,7 +41,12 @@ export default function CubeVisualization({}: CubeVisualizationProps = {}) {
         <p className="text-sm font-roboto-mono text-gray-400">9x9x9ft DIGITAL GLASS CUBE</p>
       </div>
       
-      <div className="cube-container flex justify-center items-center h-96">
+      <div className="cube-container flex justify-center items-center h-96 relative">
+        <SoundVisualizer 
+          isActive={true} 
+          intensity={0.7}
+          color="#00d9ff"
+        />
         <motion.div 
           className="cube cursor-pointer"
           onClick={handleCubeClick}

@@ -12,7 +12,7 @@ interface Message {
 interface ChatInterfaceProps {
   messages: Message[];
   isTyping: boolean;
-  onSendMessage: (content: string) => void;
+  onSendMessage: (content: string) => Promise<void>;
   aiName: string;
 }
 
@@ -28,9 +28,9 @@ export default function ChatInterface({ messages, isTyping, onSendMessage, aiNam
     scrollToBottom();
   }, [messages, isTyping]);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (inputValue.trim()) {
-      onSendMessage(inputValue.trim());
+      await onSendMessage(inputValue.trim());
       setInputValue("");
     }
   };
