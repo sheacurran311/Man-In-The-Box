@@ -144,7 +144,7 @@ export default function Home() {
         bondingLevel={intelligenceState.emotionalIQ}
         isActive={intelligenceState.emotionalIQ > 40}
       />
-      {/* Header - Mobile Optimized */}
+      {/* Experiment Status Header */}
       <header className="glass-panel p-4 mb-6 animate-fade-in">
         <div className="container mx-auto">
           {/* Mobile Layout */}
