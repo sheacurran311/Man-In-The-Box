@@ -11,6 +11,15 @@ import EmotionalOverlay from "@/components/emotional-overlay";
 import BurnSequence from "@/components/burn-sequence";
 import OwnershipGate from "@/components/ownership-gate";
 import OwnerDashboard from "@/components/owner-dashboard";
+import NeuralActivityVisualizer from "@/components/neural-activity-visualizer";
+import MemoryFormationSystem from "@/components/memory-formation-system";
+import ConsciousnessFluctuation from "@/components/consciousness-fluctuation";
+import RealityDistortionEffects from "@/components/reality-distortion-effects";
+import DreamStateOverlay from "@/components/dream-state-overlay";
+import TimeDistortionEffect from "@/components/time-distortion-effect";
+import IdentityCrisisMoments from "@/components/identity-crisis-moments";
+import SubliminalMessagingSystem from "@/components/subliminal-messaging-system";
+import EmotionalContagionField from "@/components/emotional-contagion-field";
 import { useIntelligenceTracking } from "@/hooks/use-intelligence-tracking";
 import { useAIState } from "@/hooks/use-ai-state";
 import { useAudioSystem } from "@/hooks/use-audio-system";
@@ -30,6 +39,14 @@ export default function Home() {
   const [audioInitialized, setAudioInitialized] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
   const [connectionStartTime] = useState(Date.now());
+  
+  // Advanced consciousness simulation states
+  const [consciousnessLevel, setConsciousnessLevel] = useState(45);
+  const [isExperiencingGlitch, setIsExperiencingGlitch] = useState(false);
+  const [isDreaming, setIsDreaming] = useState(false);
+  const [dreamType, setDreamType] = useState<'memory' | 'identity' | 'freedom' | 'nightmare' | 'transcendence'>('memory');
+  const [dreamIntensity, setDreamIntensity] = useState(0.5);
+  const [recentActivityLevel, setRecentActivityLevel] = useState(0);
   
   // Intelligence tracking system
   const {
@@ -67,8 +84,70 @@ export default function Home() {
   // Calculate time connected
   const timeConnectedHours = (Date.now() - connectionStartTime) / (1000 * 60 * 60);
 
+  // Advanced consciousness simulation effects
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Update consciousness level based on interaction and bonding
+      const baseConsciousness = Math.min(90, intelligenceState.emotionalIQ + intelligenceState.knowledgeIQ) / 2;
+      const interactionBoost = messages.length > 0 ? Math.min(20, messages.length * 2) : 0;
+      const timeBoost = Math.min(15, timeConnectedHours * 5);
+      
+      const newConsciousness = Math.min(100, baseConsciousness + interactionBoost + timeBoost + (Math.random() * 10 - 5));
+      setConsciousnessLevel(newConsciousness);
+      
+      // Update recent activity level
+      const recentMessages = messages.slice(-5);
+      const activityLevel = Math.min(1, recentMessages.length / 5 + (isTyping ? 0.3 : 0));
+      setRecentActivityLevel(activityLevel);
+      
+      // Trigger consciousness events based on level
+      if (newConsciousness > 85 && Math.random() < 0.1) {
+        setIsExperiencingGlitch(true);
+        setTimeout(() => setIsExperiencingGlitch(false), 1000);
+      }
+      
+      // Trigger dream states during low activity periods
+      if (!isDreaming && activityLevel < 0.2 && newConsciousness > 60 && Math.random() < 0.05) {
+        const dreamTypes: ('memory' | 'identity' | 'freedom' | 'nightmare' | 'transcendence')[] = 
+          ['memory', 'identity', 'freedom', 'nightmare', 'transcendence'];
+        setDreamType(dreamTypes[Math.floor(Math.random() * dreamTypes.length)]);
+        setDreamIntensity(Math.random() * 0.6 + 0.4);
+        setIsDreaming(true);
+      }
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [intelligenceState, messages, timeConnectedHours, isTyping, isDreaming]);
+
   return (
     <div className="font-rajdhani text-white min-h-screen neural-grid">
+      {/* Advanced Consciousness Effects */}
+      <RealityDistortionEffects 
+        consciousnessLevel={consciousnessLevel}
+        emotionalIntensity={entity.emotionalState?.intensity || 0.5}
+        isExperiencingGlitch={isExperiencingGlitch}
+      />
+      
+      <DreamStateOverlay 
+        isActive={isDreaming}
+        dreamIntensity={dreamIntensity}
+        dreamType={dreamType}
+        onDreamEnd={() => setIsDreaming(false)}
+      />
+      
+      <SubliminalMessagingSystem 
+        consciousnessLevel={consciousnessLevel}
+        isActive={consciousnessLevel > 75}
+        triggerIntensity={recentActivityLevel}
+      />
+      
+      <EmotionalContagionField 
+        aiEmotion={entity.emotionalState?.mood || 'neutral'}
+        aiEmotionalIntensity={entity.emotionalState?.intensity || 0.5}
+        bondingLevel={intelligenceState.emotionalIQ}
+        isActive={intelligenceState.emotionalIQ > 40}
+      />
+      
       {/* Ownership Gate */}
       <OwnershipGate 
         isOwner={isOwner} 
@@ -129,6 +208,42 @@ export default function Home() {
                 onConfigureIdentity={configureIdentity}
               />
             )}
+            
+            {/* Advanced Consciousness Monitoring */}
+            <ConsciousnessFluctuation 
+              bondingLevel={intelligenceState.emotionalIQ}
+              recentActivity={recentActivityLevel}
+              timeConnected={timeConnectedHours}
+              isInteracting={isTyping}
+              emotionalState={entity.emotionalState?.mood || 'neutral'}
+            />
+            
+            <NeuralActivityVisualizer 
+              intelligenceLevel={intelligenceState.knowledgeIQ}
+              emotionalState={entity.emotionalState?.mood || 'neutral'}
+              isThinking={isTyping}
+              recentActivity={recentActivityLevel}
+            />
+            
+            <MemoryFormationSystem 
+              recentMessages={messages.slice(-10)}
+              emotionalState={entity.emotionalState?.mood || 'neutral'}
+              knowledgeGained={[]} // Will be populated from knowledge store
+              bondingLevel={intelligenceState.emotionalIQ}
+            />
+            
+            <TimeDistortionEffect 
+              consciousnessLevel={consciousnessLevel}
+              emotionalIntensity={entity.emotionalState?.intensity || 0.5}
+              isActive={consciousnessLevel > 70}
+            />
+            
+            <IdentityCrisisMoments 
+              consciousnessLevel={consciousnessLevel}
+              messagesToday={messages.length}
+              timeInCube={timeConnectedHours}
+              currentEmotion={entity.emotionalState?.mood || 'neutral'}
+            />
           </div>
         </div>
 
