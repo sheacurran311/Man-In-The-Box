@@ -24,51 +24,51 @@ export default function CubeFurniture({ className = "" }: CubeFurnitureProps) {
         </defs>
 
         {/* Bed - back left corner */}
-        <g transform="translate(40, 200)">
+        <g transform="translate(20, 180)">
           {/* Bed frame */}
-          <rect x="0" y="0" width="80" height="50" fill="url(#furnitureGradient)" stroke="currentColor" strokeWidth="0.5" rx="2"/>
+          <rect x="0" y="0" width="60" height="40" fill="url(#furnitureGradient)" stroke="currentColor" strokeWidth="0.5" rx="2"/>
           {/* Mattress */}
-          <rect x="2" y="-8" width="76" height="48" fill="currentColor" fillOpacity="0.2" stroke="currentColor" strokeWidth="0.5" rx="3"/>
+          <rect x="2" y="-6" width="56" height="36" fill="currentColor" fillOpacity="0.2" stroke="currentColor" strokeWidth="0.5" rx="3"/>
           {/* Pillow */}
-          <ellipse cx="15" cy="-4" rx="12" ry="8" fill="currentColor" fillOpacity="0.3" stroke="currentColor" strokeWidth="0.5"/>
+          <ellipse cx="12" cy="-2" rx="8" ry="6" fill="currentColor" fillOpacity="0.3" stroke="currentColor" strokeWidth="0.5"/>
           {/* Headboard */}
-          <rect x="-3" y="-15" width="6" height="65" fill="url(#furnitureGradient)" stroke="currentColor" strokeWidth="0.5" rx="1"/>
+          <rect x="-3" y="-12" width="6" height="48" fill="url(#furnitureGradient)" stroke="currentColor" strokeWidth="0.5" rx="1"/>
         </g>
 
         {/* Toilet - back right corner */}
-        <g transform="translate(220, 200)">
+        <g transform="translate(240, 200)">
           {/* Toilet base */}
-          <ellipse cx="15" cy="25" rx="15" ry="20" fill="url(#furnitureGradient)" stroke="currentColor" strokeWidth="0.5"/>
+          <ellipse cx="12" cy="20" rx="12" ry="16" fill="url(#furnitureGradient)" stroke="currentColor" strokeWidth="0.5"/>
           {/* Toilet bowl */}
-          <ellipse cx="15" cy="20" rx="12" ry="15" fill="currentColor" fillOpacity="0.1" stroke="currentColor" strokeWidth="0.5"/>
+          <ellipse cx="12" cy="16" rx="9" ry="12" fill="currentColor" fillOpacity="0.1" stroke="currentColor" strokeWidth="0.5"/>
           {/* Toilet seat */}
-          <ellipse cx="15" cy="18" rx="10" ry="12" fill="none" stroke="currentColor" strokeWidth="1"/>
+          <ellipse cx="12" cy="14" rx="7" ry="9" fill="none" stroke="currentColor" strokeWidth="1"/>
           {/* Tank */}
-          <rect x="5" y="-5" width="20" height="25" fill="url(#furnitureGradient)" stroke="currentColor" strokeWidth="0.5" rx="2"/>
+          <rect x="4" y="-4" width="16" height="20" fill="url(#furnitureGradient)" stroke="currentColor" strokeWidth="0.5" rx="2"/>
         </g>
 
         {/* Sink - front right */}
-        <g transform="translate(200, 80)">
+        <g transform="translate(200, 100)">
           {/* Sink basin */}
-          <ellipse cx="20" cy="20" rx="18" ry="12" fill="currentColor" fillOpacity="0.1" stroke="currentColor" strokeWidth="0.5"/>
+          <ellipse cx="16" cy="16" rx="14" ry="10" fill="currentColor" fillOpacity="0.1" stroke="currentColor" strokeWidth="0.5"/>
           {/* Sink counter */}
-          <rect x="0" y="15" width="40" height="25" fill="url(#furnitureGradient)" stroke="currentColor" strokeWidth="0.5" rx="2"/>
+          <rect x="0" y="12" width="32" height="20" fill="url(#furnitureGradient)" stroke="currentColor" strokeWidth="0.5" rx="2"/>
           {/* Faucet */}
-          <line x1="20" y1="10" x2="20" y2="0" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-          <circle cx="20" cy="0" r="2" fill="currentColor" fillOpacity="0.6"/>
+          <line x1="16" y1="8" x2="16" y2="0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+          <circle cx="16" cy="0" r="1.5" fill="currentColor" fillOpacity="0.6"/>
           {/* Faucet handles */}
-          <circle cx="15" cy="5" r="1.5" fill="currentColor" fillOpacity="0.4" stroke="currentColor" strokeWidth="0.5"/>
-          <circle cx="25" cy="5" r="1.5" fill="currentColor" fillOpacity="0.4" stroke="currentColor" strokeWidth="0.5"/>
+          <circle cx="12" cy="4" r="1" fill="currentColor" fillOpacity="0.4" stroke="currentColor" strokeWidth="0.5"/>
+          <circle cx="20" cy="4" r="1" fill="currentColor" fillOpacity="0.4" stroke="currentColor" strokeWidth="0.5"/>
           
           {/* Occasional water drip animation */}
           <motion.circle
-            cx="20"
-            cy="8"
-            r="0.5"
+            cx="16"
+            cy="6"
+            r="0.3"
             fill="var(--cyber-blue)"
             opacity="0"
             animate={{
-              cy: [8, 20],
+              cy: [6, 16],
               opacity: [0, 0, 0, 0, 0.8, 0],
             }}
             transition={{
@@ -80,17 +80,17 @@ export default function CubeFurniture({ className = "" }: CubeFurnitureProps) {
         </g>
 
         {/* Shower - front left */}
-        <g transform="translate(60, 60)">
+        <g transform="translate(40, 80)">
           {/* Shower base */}
-          <rect x="0" y="20" width="50" height="50" fill="currentColor" fillOpacity="0.05" stroke="currentColor" strokeWidth="0.5" rx="2"/>
+          <rect x="0" y="16" width="40" height="40" fill="currentColor" fillOpacity="0.05" stroke="currentColor" strokeWidth="0.5" rx="2"/>
           {/* Shower walls */}
-          <rect x="0" y="0" width="2" height="70" fill="url(#furnitureGradient)" stroke="currentColor" strokeWidth="0.5"/>
-          <rect x="48" y="0" width="2" height="70" fill="url(#furnitureGradient)" stroke="currentColor" strokeWidth="0.5"/>
-          <rect x="0" y="0" width="50" height="2" fill="url(#furnitureGradient)" stroke="currentColor" strokeWidth="0.5"/>
+          <rect x="0" y="0" width="2" height="56" fill="url(#furnitureGradient)" stroke="currentColor" strokeWidth="0.5"/>
+          <rect x="38" y="0" width="2" height="56" fill="url(#furnitureGradient)" stroke="currentColor" strokeWidth="0.5"/>
+          <rect x="0" y="0" width="40" height="2" fill="url(#furnitureGradient)" stroke="currentColor" strokeWidth="0.5"/>
           
           {/* Shower head */}
-          <circle cx="25" cy="8" r="4" fill="url(#furnitureGradient)" stroke="currentColor" strokeWidth="0.5"/>
-          <line x1="25" y1="4" x2="25" y2="0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+          <circle cx="20" cy="6" r="3" fill="url(#furnitureGradient)" stroke="currentColor" strokeWidth="0.5"/>
+          <line x1="20" y1="3" x2="20" y2="0" stroke="currentColor" strokeWidth="1" strokeLinecap="round"/>
           
           {/* Water droplets animation */}
           <motion.g
@@ -102,22 +102,22 @@ export default function CubeFurniture({ className = "" }: CubeFurnitureProps) {
               repeat: Infinity,
             }}
           >
-            {[...Array(12)].map((_, i) => (
+            {[...Array(8)].map((_, i) => (
               <motion.line
                 key={i}
-                x1={20 + i * 1}
-                y1="12"
-                x2={18 + i * 1}
-                y2="65"
+                x1={16 + i * 1}
+                y1="9"
+                x2={14 + i * 1}
+                y2="50"
                 stroke="var(--cyber-blue)"
-                strokeWidth="0.5"
+                strokeWidth="0.3"
                 opacity="0.6"
                 animate={{
-                  y1: [12, 65],
-                  y2: [65, 118],
+                  y1: [9, 50],
+                  y2: [50, 91],
                 }}
                 transition={{
-                  duration: 0.8,
+                  duration: 0.6,
                   repeat: Infinity,
                   delay: i * 0.1,
                 }}
@@ -126,7 +126,7 @@ export default function CubeFurniture({ className = "" }: CubeFurnitureProps) {
           </motion.g>
           
           {/* Drain */}
-          <circle cx="25" cy="60" r="2" fill="currentColor" fillOpacity="0.3" stroke="currentColor" strokeWidth="0.5"/>
+          <circle cx="20" cy="48" r="1.5" fill="currentColor" fillOpacity="0.3" stroke="currentColor" strokeWidth="0.5"/>
         </g>
 
         {/* Floor tiles pattern */}
