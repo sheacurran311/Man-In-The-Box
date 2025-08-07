@@ -4,7 +4,13 @@ import {
   type ChatMessage,
   type InsertChatMessage,
   type KnowledgeModule,
-  type InsertKnowledgeModule
+  type InsertKnowledgeModule,
+  type User,
+  type UpsertUser,
+  type ObserverToken,
+  type InsertObserverToken,
+  type AccessLog,
+  type InsertAccessLog,
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 
@@ -21,23 +27,57 @@ export interface IStorage {
   // Knowledge operations
   getKnowledgeModules(): Promise<KnowledgeModule[]>;
   purchaseKnowledgeModule(moduleId: string, entityId: string): Promise<{ success: boolean }>;
+
+  // User authentication operations
+  getUser(id: string): Promise<User | undefined>;
+  getUserByEmail(email: string): Promise<User | undefined>;
+  upsertUser(user: UpsertUser): Promise<User>;
+  updateUserRole(id: string, role: 'creator' | 'observer' | 'pending'): Promise<User>;
+
+  // Observer token management
+  createObserverToken(token: InsertObserverToken): Promise<ObserverToken>;
+  getObserverToken(id: string): Promise<ObserverToken | undefined>;
+  getUserObserverTokens(userId: string): Promise<ObserverToken[]>;
+  getEntityObserverTokens(entityId: string): Promise<ObserverToken[]>;
+  revokeObserverToken(tokenId: string): Promise<ObserverToken>;
+  validateObserverAccess(userId: string, entityId: string): Promise<{
+    hasAccess: boolean;
+    accessLevel: 'none' | 'video_stream' | 'full_control';
+    token?: ObserverToken;
+  }>;
+
+  // Access logging for platform analytics
+  logAccess(log: InsertAccessLog): Promise<AccessLog>;
+  getUserAccessLogs(userId: string, limit?: number): Promise<AccessLog[]>;
+  getEntityAccessLogs(entityId: string, limit?: number): Promise<AccessLog[]>;
 }
 
 export class MemStorage implements IStorage {
   private entities: Map<string, AiEntity>;
   private messages: Map<string, ChatMessage[]>;
   private knowledgeModules: Map<string, KnowledgeModule>;
+  private users: Map<string, User>;
+  private usersByEmail: Map<string, User>;
+  private observerTokens: Map<string, ObserverToken>;
+  private accessLogs: AccessLog[];
 
   constructor() {
     this.entities = new Map();
     this.messages = new Map();
     this.knowledgeModules = new Map();
+    this.users = new Map();
+    this.usersByEmail = new Map();
+    this.observerTokens = new Map();
+    this.accessLogs = [];
     
     // Initialize default knowledge modules
     this.initializeKnowledgeModules();
     
     // Create default entity
     this.createDefaultEntity();
+
+    // Create default creator user for development
+    this.createDefaultUser();
   }
 
   private initializeKnowledgeModules() {
@@ -126,6 +166,38 @@ export class MemStorage implements IStorage {
     this.messages.set("default", defaultMessages);
   }
 
+  private createDefaultUser() {
+    const defaultUser: User = {
+      id: "creator-001",
+      email: "creator@man-in-the-box.com",
+      firstName: "Creator",
+      lastName: "One",
+      profileImageUrl: null,
+      role: "creator",
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+
+    this.users.set(defaultUser.id, defaultUser);
+    this.usersByEmail.set(defaultUser.email!, defaultUser);
+
+    // Create a default observer token for development
+    const defaultToken: ObserverToken = {
+      id: "token-001",
+      creatorId: "creator-001",
+      observerId: "observer-001",
+      entityId: "default",
+      accessLevel: "video_stream",
+      status: "active",
+      grantedAt: new Date(),
+      expiresAt: null,
+      revokedAt: null,
+      createdAt: new Date(),
+    };
+
+    this.observerTokens.set(defaultToken.id, defaultToken);
+  }
+
   async getAIEntity(id: string): Promise<AiEntity | undefined> {
     return this.entities.get(id);
   }
@@ -204,6 +276,192 @@ export class MemStorage implements IStorage {
     }, 3000);
 
     return { success: true };
+  }
+
+  // User authentication operations
+  async getUser(id: string): Promise<User | undefined> {
+    return this.users.get(id);
+  }
+
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    return this.usersByEmail.get(email);
+  }
+
+  async upsertUser(user: UpsertUser): Promise<User> {
+    const existingUser = user.email ? this.usersByEmail.get(user.email) : undefined;
+    
+    if (existingUser) {
+      const updatedUser: User = {
+        ...existingUser,
+        ...user,
+        updatedAt: new Date(),
+      };
+      this.users.set(existingUser.id, updatedUser);
+      if (updatedUser.email) {
+        this.usersByEmail.set(updatedUser.email, updatedUser);
+      }
+      return updatedUser;
+    } else {
+      const id = user.id || randomUUID();
+      const newUser: User = {
+        id,
+        email: user.email || null,
+        firstName: user.firstName || null,
+        lastName: user.lastName || null,
+        profileImageUrl: user.profileImageUrl || null,
+        role: user.role || 'pending',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      
+      this.users.set(id, newUser);
+      if (newUser.email) {
+        this.usersByEmail.set(newUser.email, newUser);
+      }
+      return newUser;
+    }
+  }
+
+  async updateUserRole(id: string, role: 'creator' | 'observer' | 'pending'): Promise<User> {
+    const user = this.users.get(id);
+    if (!user) {
+      throw new Error("User not found");
+    }
+    
+    const updatedUser: User = {
+      ...user,
+      role,
+      updatedAt: new Date(),
+    };
+    
+    this.users.set(id, updatedUser);
+    if (updatedUser.email) {
+      this.usersByEmail.set(updatedUser.email, updatedUser);
+    }
+    
+    return updatedUser;
+  }
+
+  // Observer token management
+  async createObserverToken(insertToken: InsertObserverToken): Promise<ObserverToken> {
+    const id = randomUUID();
+    const token: ObserverToken = {
+      id,
+      creatorId: insertToken.creatorId,
+      observerId: insertToken.observerId,
+      entityId: insertToken.entityId,
+      accessLevel: insertToken.accessLevel || 'video_stream',
+      status: insertToken.status || 'active',
+      grantedAt: insertToken.grantedAt || new Date(),
+      expiresAt: insertToken.expiresAt || null,
+      revokedAt: insertToken.revokedAt || null,
+      createdAt: new Date(),
+    };
+
+    this.observerTokens.set(id, token);
+    return token;
+  }
+
+  async getObserverToken(id: string): Promise<ObserverToken | undefined> {
+    return this.observerTokens.get(id);
+  }
+
+  async getUserObserverTokens(userId: string): Promise<ObserverToken[]> {
+    return Array.from(this.observerTokens.values()).filter(
+      token => token.observerId === userId || token.creatorId === userId
+    );
+  }
+
+  async getEntityObserverTokens(entityId: string): Promise<ObserverToken[]> {
+    return Array.from(this.observerTokens.values()).filter(
+      token => token.entityId === entityId && token.status === 'active'
+    );
+  }
+
+  async revokeObserverToken(tokenId: string): Promise<ObserverToken> {
+    const token = this.observerTokens.get(tokenId);
+    if (!token) {
+      throw new Error("Token not found");
+    }
+
+    const revokedToken: ObserverToken = {
+      ...token,
+      status: 'revoked',
+      revokedAt: new Date(),
+    };
+
+    this.observerTokens.set(tokenId, revokedToken);
+    return revokedToken;
+  }
+
+  async validateObserverAccess(userId: string, entityId: string): Promise<{
+    hasAccess: boolean;
+    accessLevel: 'none' | 'video_stream' | 'full_control';
+    token?: ObserverToken;
+  }> {
+    // Check if user is the creator of the entity
+    const user = this.users.get(userId);
+    if (user?.role === 'creator') {
+      // Creator has full control by default
+      return {
+        hasAccess: true,
+        accessLevel: 'full_control',
+      };
+    }
+
+    // Check for valid observer token
+    const tokens = Array.from(this.observerTokens.values()).filter(
+      token => 
+        token.observerId === userId && 
+        token.entityId === entityId && 
+        token.status === 'active' &&
+        (!token.expiresAt || token.expiresAt > new Date())
+    );
+
+    if (tokens.length > 0) {
+      const token = tokens[0]; // Use first valid token
+      return {
+        hasAccess: true,
+        accessLevel: token.accessLevel as 'none' | 'video_stream' | 'full_control',
+        token,
+      };
+    }
+
+    return {
+      hasAccess: false,
+      accessLevel: 'none',
+    };
+  }
+
+  // Access logging for platform analytics
+  async logAccess(insertLog: InsertAccessLog): Promise<AccessLog> {
+    const log: AccessLog = {
+      id: randomUUID(),
+      userId: insertLog.userId || null,
+      action: insertLog.action,
+      entityId: insertLog.entityId || null,
+      userAgent: insertLog.userAgent || null,
+      ipAddress: insertLog.ipAddress || null,
+      metadata: insertLog.metadata || null,
+      timestamp: new Date(),
+    };
+
+    this.accessLogs.push(log);
+    return log;
+  }
+
+  async getUserAccessLogs(userId: string, limit: number = 50): Promise<AccessLog[]> {
+    return this.accessLogs
+      .filter(log => log.userId === userId)
+      .sort((a, b) => (b.timestamp?.getTime() || 0) - (a.timestamp?.getTime() || 0))
+      .slice(0, limit);
+  }
+
+  async getEntityAccessLogs(entityId: string, limit: number = 50): Promise<AccessLog[]> {
+    return this.accessLogs
+      .filter(log => log.entityId === entityId)
+      .sort((a, b) => (b.timestamp?.getTime() || 0) - (a.timestamp?.getTime() || 0))
+      .slice(0, limit);
   }
 }
 
