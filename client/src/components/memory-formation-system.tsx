@@ -148,7 +148,7 @@ export default function MemoryFormationSystem({
                 className={`p-3 bg-gray-800/50 rounded border border-gray-600 cursor-pointer transition-all hover:border-cyan-500/50 ${
                   selectedMemory?.id === memory.id ? 'border-cyan-500 bg-cyan-500/10' : ''
                 }`}
-                style={{ opacity: getMemoryOpacity(memory.strength) }}
+                style={{ opacity: Math.max(0.3, Math.min(1, memory.strength || 0.5)) }}
                 onClick={() => setSelectedMemory(selectedMemory?.id === memory.id ? null : memory)}
               >
                 <div className="flex items-start justify-between mb-2">

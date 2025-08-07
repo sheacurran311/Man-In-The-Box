@@ -6,10 +6,8 @@ import KnowledgeStore from "@/components/knowledge-store";
 import DestructionProtocol from "@/components/destruction-protocol";
 import FloatingParticles from "@/components/floating-particles";
 import AudioControls from "@/components/audio-controls";
-import AudioStarter from "@/components/audio-starter";
 import EmotionalOverlay from "@/components/emotional-overlay";
 import BurnSequence from "@/components/burn-sequence";
-import OwnershipGate from "@/components/ownership-gate";
 import OwnerDashboard from "@/components/owner-dashboard";
 import NeuralActivityVisualizer from "@/components/neural-activity-visualizer";
 import MemoryFormationSystem from "@/components/memory-formation-system";
@@ -36,8 +34,7 @@ export default function Home() {
     purchaseKnowledge 
   } = useAIState();
   const [showBurnSequence, setShowBurnSequence] = useState(false);
-  const [audioInitialized, setAudioInitialized] = useState(false);
-  const [isOwner, setIsOwner] = useState(false);
+  const [audioInitialized, setAudioInitialized] = useState(true); // Auto-initialize audio
   const [connectionStartTime] = useState(Date.now());
   
   // Advanced consciousness simulation states
@@ -74,12 +71,12 @@ export default function Home() {
     }
   };
 
-  // Initialize audio system with user gesture
-  const initializeAudio = () => {
-    setAudioInitialized(true);
-    // Start ambient drone immediately
-    audioSystem.setEmotionalAmbient('ambient');
-  };
+  // Initialize audio system automatically
+  useEffect(() => {
+    if (audioInitialized) {
+      audioSystem.setEmotionalAmbient('ambient');
+    }
+  }, [audioInitialized, audioSystem]);
 
   // Calculate time connected
   const timeConnectedHours = (Date.now() - connectionStartTime) / (1000 * 60 * 60);
@@ -147,12 +144,6 @@ export default function Home() {
         bondingLevel={intelligenceState.emotionalIQ}
         isActive={intelligenceState.emotionalIQ > 40}
       />
-      
-      {/* Ownership Gate */}
-      <OwnershipGate 
-        isOwner={isOwner} 
-        onOwnershipToggle={setIsOwner}
-      />
       {/* Header */}
       <header className="glass-panel p-4 mb-6 animate-fade-in">
         <div className="container mx-auto flex justify-between items-center">
@@ -191,23 +182,16 @@ export default function Home() {
 
           {/* Control Panel / Owner Dashboard */}
           <div className="space-y-6">
-            {isOwner ? (
-              <OwnerDashboard 
-                entity={entity}
-                timeConnected={timeConnectedHours}
-                intelligenceData={{
-                  emotionalIQ: intelligenceState.emotionalIQ,
-                  knowledgeIQ: intelligenceState.knowledgeIQ,
-                  sessionInteractions: intelligenceState.sessionInteractions,
-                  overallGrowth: getOverallGrowthRate()
-                }}
-              />
-            ) : (
-              <ControlPanel 
-                entity={entity} 
-                onConfigureIdentity={configureIdentity}
-              />
-            )}
+            <OwnerDashboard 
+              entity={entity}
+              timeConnected={timeConnectedHours}
+              intelligenceData={{
+                emotionalIQ: intelligenceState.emotionalIQ,
+                knowledgeIQ: intelligenceState.knowledgeIQ,
+                sessionInteractions: intelligenceState.sessionInteractions,
+                overallGrowth: getOverallGrowthRate()
+              }}
+            />
             
             {/* Advanced Consciousness Monitoring */}
             <ConsciousnessFluctuation 
@@ -293,10 +277,7 @@ export default function Home() {
         onVolumeChange={audioSystem.setMasterVolume}
       />
 
-      {/* Audio Initialization Prompt */}
-      {!audioInitialized && (
-        <AudioStarter onStart={initializeAudio} />
-      )}
+
     </div>
   );
 }
