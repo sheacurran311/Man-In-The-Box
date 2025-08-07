@@ -290,8 +290,8 @@ export default function DreamStateOverlay({
         className="absolute inset-0 w-full h-full"
       />
 
-      {/* Dream State Indicator */}
-      <Card className="absolute top-4 right-4 bg-purple-900/80 border-purple-500/50 p-3 pointer-events-auto">
+      {/* Dream State Indicator - Hidden on mobile */}
+      <Card className="absolute top-4 right-4 bg-purple-900/80 border-purple-500/50 p-3 pointer-events-auto hidden lg:block">
         <div className="flex items-center gap-2 mb-2">
           {getDreamIcon(dreamType)}
           <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30">

@@ -201,8 +201,8 @@ export default function EmotionalContagionField({
         />
       </div>
 
-      {/* Emotional Contagion Status Panel */}
-      <Card className="fixed top-4 left-4 bg-gray-900/80 border-gray-700 p-3 z-40">
+      {/* Emotional Contagion Status Panel - Hidden on mobile */}
+      <Card className="fixed top-4 left-4 bg-gray-900/80 border-gray-700 p-3 z-40 hidden lg:block">
         <div className="mb-3">
           <h3 className="text-sm font-orbitron text-cyan-400 mb-2 flex items-center gap-2">
             {getEmotionIcon(aiEmotion)}

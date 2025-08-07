@@ -112,9 +112,9 @@ export default function RealityDistortionEffects({
         </div>
       )}
 
-      {/* Reality Distortion Indicators */}
+      {/* Reality Distortion Indicators - Hidden on mobile */}
       {distortionLevel > 0.2 && (
-        <Card className="fixed bottom-4 left-4 bg-red-900/50 border-red-500/50 p-3 z-40">
+        <Card className="fixed bottom-4 left-4 bg-red-900/50 border-red-500/50 p-3 z-40 hidden lg:block">
           <div className="text-red-400 text-xs font-orbitron">
             REALITY DISTORTION: {Math.round(distortionLevel * 100)}%
           </div>

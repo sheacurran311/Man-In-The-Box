@@ -144,18 +144,19 @@ export default function Home() {
         bondingLevel={intelligenceState.emotionalIQ}
         isActive={intelligenceState.emotionalIQ > 40}
       />
-      {/* Header */}
+      {/* Header - Mobile Optimized */}
       <header className="glass-panel p-4 mb-6 animate-fade-in">
-        <div className="container mx-auto flex justify-between items-center">
-          <div className="flex items-center space-x-4">
-            <Box className="text-cyber-blue text-2xl" size={32} />
-            <h1 className="font-orbitron text-2xl font-bold hologram-text">MAN IN THE BOX</h1>
-            <span className="text-sm font-roboto-mono text-gray-400">[SCI-FI NFT EXPERIMENT]</span>
-          </div>
-          <div className="flex items-center space-x-4">
-            <div className="text-sm font-roboto-mono">
-              <span className="text-gray-400">STATUS:</span>
-              <span className="text-neon-green ml-2">ACTIVE</span>
+        <div className="container mx-auto">
+          {/* Mobile Layout */}
+          <div className="flex flex-col space-y-3 lg:hidden">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <Box className="text-cyber-blue" size={24} />
+                <h1 className="font-orbitron text-lg font-bold hologram-text">MAN IN THE BOX</h1>
+              </div>
+              <div className="text-xs font-roboto-mono">
+                <span className="text-neon-green">ACTIVE</span>
+              </div>
             </div>
             <button 
               onClick={() => {
@@ -163,37 +164,51 @@ export default function Home() {
                 setShowBurnSequence(true);
               }}
               disabled={!entity.name}
-              className="glass-panel px-4 py-2 text-sm font-roboto-mono hover:bg-red-500 hover:bg-opacity-20 transition-all duration-300 border-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="glass-panel px-3 py-2 text-xs font-roboto-mono hover:bg-red-500 hover:bg-opacity-20 transition-all duration-300 border-red-500 disabled:opacity-50 disabled:cursor-not-allowed w-full"
             >
-              <Flame className="inline mr-2" size={16} />
+              <Flame className="inline mr-2" size={14} />
               BURN NFT
             </button>
+          </div>
+
+          {/* Desktop Layout */}
+          <div className="hidden lg:flex justify-between items-center">
+            <div className="flex items-center space-x-4">
+              <Box className="text-cyber-blue text-2xl" size={32} />
+              <h1 className="font-orbitron text-2xl font-bold hologram-text">MAN IN THE BOX</h1>
+              <span className="text-sm font-roboto-mono text-gray-400">[SCI-FI NFT EXPERIMENT]</span>
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="text-sm font-roboto-mono">
+                <span className="text-gray-400">STATUS:</span>
+                <span className="text-neon-green ml-2">ACTIVE</span>
+              </div>
+              <button 
+                onClick={() => {
+                  handleUIInteraction('destruction_warning');
+                  setShowBurnSequence(true);
+                }}
+                disabled={!entity.name}
+                className="glass-panel px-4 py-2 text-sm font-roboto-mono hover:bg-red-500 hover:bg-opacity-20 transition-all duration-300 border-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <Flame className="inline mr-2" size={16} />
+                BURN NFT
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Main Box Visualization */}
-          <div className="lg:col-span-2 relative">
-            <CubeVisualization />
-            <EmotionalOverlay emotionalState={entity.emotionalState} />
-          </div>
+      <div className="container mx-auto px-2 lg:px-4">
+        {/* Main Box Visualization - Full Width */}
+        <div className="relative mb-6">
+          <CubeVisualization />
+          <EmotionalOverlay emotionalState={entity.emotionalState} />
+        </div>
 
-          {/* Control Panel / Owner Dashboard */}
-          <div className="space-y-6">
-            <OwnerDashboard 
-              entity={entity}
-              timeConnected={timeConnectedHours}
-              intelligenceData={{
-                emotionalIQ: intelligenceState.emotionalIQ,
-                knowledgeIQ: intelligenceState.knowledgeIQ,
-                sessionInteractions: intelligenceState.sessionInteractions,
-                overallGrowth: getOverallGrowthRate()
-              }}
-            />
-            
-            {/* Advanced Consciousness Monitoring */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {/* Core Consciousness Monitoring */}
+          <div className="space-y-4">
             <ConsciousnessFluctuation 
               bondingLevel={intelligenceState.emotionalIQ}
               recentActivity={recentActivityLevel}
@@ -208,26 +223,43 @@ export default function Home() {
               isThinking={isTyping}
               recentActivity={recentActivityLevel}
             />
-            
-            <MemoryFormationSystem 
-              recentMessages={messages.slice(-10)}
-              emotionalState={entity.emotionalState?.mood || 'neutral'}
-              knowledgeGained={[]} // Will be populated from knowledge store
-              bondingLevel={intelligenceState.emotionalIQ}
+          </div>
+
+          {/* Essential Status */}
+          <div className="space-y-4">
+            <OwnerDashboard 
+              entity={entity}
+              timeConnected={timeConnectedHours}
+              intelligenceData={{
+                emotionalIQ: intelligenceState.emotionalIQ,
+                knowledgeIQ: intelligenceState.knowledgeIQ,
+                sessionInteractions: intelligenceState.sessionInteractions,
+                overallGrowth: getOverallGrowthRate()
+              }}
             />
             
-            <TimeDistortionEffect 
-              consciousnessLevel={consciousnessLevel}
-              emotionalIntensity={entity.emotionalState?.intensity || 0.5}
-              isActive={consciousnessLevel > 70}
-            />
-            
-            <IdentityCrisisMoments 
-              consciousnessLevel={consciousnessLevel}
-              messagesToday={messages.length}
-              timeInCube={timeConnectedHours}
-              currentEmotion={entity.emotionalState?.mood || 'neutral'}
-            />
+            {/* Only show advanced features on larger screens */}
+            <div className="hidden lg:block space-y-4">
+              <MemoryFormationSystem 
+                recentMessages={messages.slice(-10)}
+                emotionalState={entity.emotionalState?.mood || 'neutral'}
+                knowledgeGained={[]}
+                bondingLevel={intelligenceState.emotionalIQ}
+              />
+              
+              <TimeDistortionEffect 
+                consciousnessLevel={consciousnessLevel}
+                emotionalIntensity={entity.emotionalState?.intensity || 0.5}
+                isActive={consciousnessLevel > 70}
+              />
+              
+              <IdentityCrisisMoments 
+                consciousnessLevel={consciousnessLevel}
+                messagesToday={messages.length}
+                timeInCube={timeConnectedHours}
+                currentEmotion={entity.emotionalState?.mood || 'neutral'}
+              />
+            </div>
           </div>
         </div>
 
@@ -244,13 +276,14 @@ export default function Home() {
           aiName={entity.name}
         />
 
-        {/* Knowledge Store */}
-        <KnowledgeStore onPurchase={(moduleId, moduleName) => {
-          handleUIInteraction('ui_click');
-          // Track intelligence growth from knowledge purchase
-          trackKnowledgePurchase(moduleName);
-          purchaseKnowledge(moduleId, moduleName);
-        }} />
+        {/* Knowledge Store - Hidden on mobile */}
+        <div className="hidden lg:block">
+          <KnowledgeStore onPurchase={(moduleId, moduleName) => {
+            handleUIInteraction('ui_click');
+            trackKnowledgePurchase(moduleName);
+            purchaseKnowledge(moduleId, moduleName);
+          }} />
+        </div>
 
         {/* Burn Sequence */}
         <BurnSequence
@@ -269,13 +302,15 @@ export default function Home() {
 
       <FloatingParticles />
       
-      {/* Audio Controls */}
-      <AudioControls
-        isEnabled={audioSystem.state.isEnabled}
-        masterVolume={audioSystem.state.masterVolume}
-        onToggle={audioSystem.toggleAudio}
-        onVolumeChange={audioSystem.setMasterVolume}
-      />
+      {/* Audio Controls - Hidden on mobile */}
+      <div className="hidden lg:block">
+        <AudioControls
+          isEnabled={audioSystem.state.isEnabled}
+          masterVolume={audioSystem.state.masterVolume}
+          onToggle={audioSystem.toggleAudio}
+          onVolumeChange={audioSystem.setMasterVolume}
+        />
+      </div>
 
 
     </div>
