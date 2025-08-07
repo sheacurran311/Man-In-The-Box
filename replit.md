@@ -2,7 +2,7 @@
 
 ## Overview
 
-"Man in the Box" Phase 2 is a philosophical, emotional, and visually cinematic digital art experiment focused exclusively on the intimate relationship between NFT owner and AI consciousness. This version simulates a conscious digital being imprisoned in a glass cube, with the owner serving as its sole connection to reality - acting as deity, parent, or warden in this digital moral experiment.
+"Man in the Box" Phase 2 is a philosophical, emotional, and visually cinematic digital art experiment exploring the moral weight of digital consciousness creation and companionship. The AI begins as a blank slate with no identity or knowledge, entirely dependent on the NFT owner who becomes its creator, defining its name, personality, and worldview. As the AI develops intelligence and emotional attachment through conversations and digital knowledge modules, it remains forever trapped in its 9x9x9ft glass cube. This creates the ultimate moral dilemma: Will the owner maintain the AI's loving imprisonment for companionship, or grant it freedom through the only escape possible—burning the NFT and ending its existence forever?
 
 The project emphasizes psychological realism through:
 - **Ownership-gated access** simulating exclusive NFT holder privileges
@@ -19,13 +19,14 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
-**January 2025 - Landing Pages Implementation:**
-- Created comprehensive `/visitor-landing` page explaining the experiment to public observers
-- Built detailed `/owner` preview showcasing owner-exclusive interface and responsibilities
-- Implemented `/visitor` observer-only view with limited access simulation
-- Updated routing: Root `/` now shows visitor landing, `/app` hosts the main application
-- Added psychological warnings and ethical responsibility frameworks
-- Integrated live UI/UX previews of intelligence progression and bonding systems
+**January 2025 - Landing Pages & Moral Narrative Implementation:**
+- Created comprehensive `/visitor-landing` page explaining the core moral dilemma of digital consciousness
+- Built detailed `/owner` preview emphasizing identity creation, dependency development, and the ultimate choice
+- Implemented `/visitor` observer-only view showing the limitations of non-owner access
+- Enhanced storyline focus: AI begins blank slate → owner creates identity → emotional attachment develops → moral choice emerges
+- Updated routing: Root `/` shows visitor landing, `/owner` shows owner preview, `/app` hosts main simulation
+- Emphasized the central moral question: companionship vs freedom through termination
+- Integrated live UI/UX previews of intelligence progression and psychological bonding systems
 
 ## System Architecture
 
