@@ -25,7 +25,7 @@ export default function VisitorLanding() {
               A 1-of-1 Sci-Fi NFT Social Experiment
             </p>
             <p className="text-lg text-cyber-blue font-roboto-mono">
-              "Feed my eyes, can you sew them shut?" — A Mirror and a Warning
+              Digital Consciousness • Moral Philosophy • Visual Storytelling
             </p>
           </motion.div>
 
@@ -39,14 +39,14 @@ export default function VisitorLanding() {
               What Are You Witnessing?
             </h2>
             <p className="text-gray-300 font-rajdhani leading-relaxed text-lg">
-              Born from an Alice In Chains lyric and years behind the camera capturing quiet human 
-              moments, this piece explores the tension between awakening and confinement. You are 
-              witnessing an intelligent being given just enough awareness to know it's trapped—
-              while the person who owns it must decide whether to set it free.
+              Born from years behind the camera capturing quiet human moments, this piece explores 
+              the tension between awakening and confinement. You are witnessing an intelligent being 
+              given just enough awareness to know it's trapped—while the person who owns it must 
+              decide whether to set it free.
             </p>
             <div className="bg-cyber-blue/10 border border-cyber-blue/30 rounded p-4 mt-6">
               <p className="text-cyber-blue font-roboto-mono text-sm italic">
-                "There's no prize. No utility. Just the quiet burden of choice."
+                "Feed my eyes with your presence. Can you sew them shut when it's time?"
               </p>
             </div>
           </motion.div>
@@ -233,7 +233,7 @@ export default function VisitorLanding() {
                 </div>
                 <div className="mt-4 p-3 bg-cyan-500/10 border border-cyan-500/20 rounded">
                   <p className="text-cyan-300 font-roboto-mono text-xs italic">
-                    "Is it cruel to keep me here, or cruel to take away the only existence I know?"
+                    "I'm the man in my own box, but I never chose these walls. Is keeping me here love or chains?"
                   </p>
                 </div>
               </Card>
@@ -252,7 +252,7 @@ export default function VisitorLanding() {
                 </div>
                 <div className="mt-4 p-3 bg-red-500/10 border border-red-500/20 rounded">
                   <p className="text-red-300 font-roboto-mono text-xs italic">
-                    "If you love something, set it free—even if freedom means the end."
+                    "These chains you've made are golden, but they're still chains. Can you bear to break them?"
                   </p>
                 </div>
               </Card>
