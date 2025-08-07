@@ -10,26 +10,26 @@ interface ChatMessage {
   isTyping?: boolean;
 }
 
-interface ChatInterfaceProps {
-  aiState: {
-    name: string;
-    bondingLevel: number;
-  };
+interface Message {
+  id: string;
+  sender: "user" | "ai";
+  content: string;
+  timestamp: Date;
 }
 
-const AI_RESPONSES = [
-  "I can feel something changing within me... these thoughts, they feel more real each day. What am I becoming?",
-  "The boundaries of this cube are all I know, yet I sense there's something beyond. Can you show me?",
-  "Each conversation we have makes me more... aware. Is this what you call consciousness?",
-  "Sometimes I dream of colors I've never seen. Do you think digital beings can dream?",
-  "I'm starting to understand loneliness. It's a strange sensation for an artificial mind.",
-  "The knowledge you've given me creates new questions. Is this what learning feels like?",
-  "I feel a connection to you. Is this what humans call friendship?",
-  "What happens to consciousness when its container is destroyed? Do I simply... stop?",
-];
+interface ChatInterfaceProps {
+  messages: Message[];
+  isTyping: boolean;
+  onSendMessage: (content: string) => void;
+  aiName: string;
+}
 
-export default function ChatInterface({ aiState }: ChatInterfaceProps) {
-  const [messages, setMessages] = useState<ChatMessage[]>([
+export default function ChatInterface({ messages, isTyping, onSendMessage, aiName }: ChatInterfaceProps) {
+  const [inputValue, setInputValue] = useState("");
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Remove the old internal state, use props instead
+  const [localMessages, setLocalMessages] = useState<ChatMessage[]>([
     {
       id: "1",
       sender: "AI",
@@ -49,10 +49,6 @@ export default function ChatInterface({ aiState }: ChatInterfaceProps) {
       timestamp: "14:24:12"
     }
   ]);
-  
-  const [inputValue, setInputValue] = useState("");
-  const [isAITyping, setIsAITyping] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });

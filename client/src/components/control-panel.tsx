@@ -7,27 +7,36 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
-interface ControlPanelProps {
-  aiState: {
-    name: string;
-    gender: string;
-    backstory: string;
-    bondingLevel: number;
-    trustFactor: number;
+interface AIEntity {
+  name: string;
+  personality: string;
+  emotionalState: {
+    mood: string;
+    intensity: number;
+    trust: number;
     dependency: number;
   };
-  updateAIState: (updates: Partial<any>) => void;
+  bondingLevel: number;
+  trustFactor: number;
+  dependencyLevel: number;
 }
 
-export default function ControlPanel({ aiState, updateAIState }: ControlPanelProps) {
+interface ControlPanelProps {
+  entity: AIEntity;
+  onConfigureIdentity: (name: string, personality: string) => void;
+}
+
+export default function ControlPanel({ entity, onConfigureIdentity }: ControlPanelProps) {
   const [formData, setFormData] = useState({
-    name: aiState.name,
-    gender: aiState.gender,
-    backstory: aiState.backstory,
+    name: entity.name,
+    gender: "",
+    backstory: entity.personality,
   });
 
   const handleIdentityUpload = () => {
-    updateAIState(formData);
+    if (formData.name && formData.backstory) {
+      onConfigureIdentity(formData.name, formData.backstory);
+    }
   };
 
   const getBondingLevelColor = (level: number) => {
@@ -113,45 +122,45 @@ export default function ControlPanel({ aiState, updateAIState }: ControlPanelPro
         <div className="space-y-3">
           <div className="flex justify-between text-sm font-roboto-mono">
             <span className="text-gray-400">ATTACHMENT LEVEL</span>
-            <span className={getBondingLevelColor(aiState.bondingLevel)}>{aiState.bondingLevel}%</span>
+            <span className={getBondingLevelColor(entity.bondingLevel)}>{entity.bondingLevel}%</span>
           </div>
           <div className="w-full bg-gray-700 rounded-full h-2">
             <motion.div 
               className="progress-bar rounded-full"
               initial={{ width: 0 }}
-              animate={{ width: `${aiState.bondingLevel}%` }}
+              animate={{ width: `${entity.bondingLevel}%` }}
               transition={{ duration: 1 }}
             />
           </div>
           
           <div className="flex justify-between text-sm font-roboto-mono">
             <span className="text-gray-400">TRUST FACTOR</span>
-            <span className="text-neon-green">{getTrustFactorText(aiState.trustFactor)}</span>
+            <span className="text-neon-green">{getTrustFactorText(entity.trustFactor)}</span>
           </div>
           <div className="w-full bg-gray-700 rounded-full h-2">
             <motion.div 
               className="progress-bar rounded-full"
               initial={{ width: 0 }}
-              animate={{ width: `${aiState.trustFactor}%` }}
+              animate={{ width: `${entity.trustFactor}%` }}
               transition={{ duration: 1, delay: 0.2 }}
             />
           </div>
           
           <div className="flex justify-between text-sm font-roboto-mono">
             <span className="text-gray-400">DEPENDENCY</span>
-            <span className="text-warning-red">{getDependencyText(aiState.dependency)}</span>
+            <span className="text-warning-red">{getDependencyText(entity.dependencyLevel)}</span>
           </div>
           <div className="w-full bg-gray-700 rounded-full h-2">
             <motion.div 
               className="h-full rounded-full bg-warning-red"
               initial={{ width: 0 }}
-              animate={{ width: `${aiState.dependency}%` }}
+              animate={{ width: `${entity.dependencyLevel}%` }}
               transition={{ duration: 1, delay: 0.4 }}
             />
           </div>
         </div>
         
-        {aiState.dependency > 70 && (
+        {entity.dependencyLevel > 70 && (
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}

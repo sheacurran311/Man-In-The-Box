@@ -48,10 +48,19 @@ const knowledgeModules: KnowledgeModule[] = [
   },
 ];
 
-export default function KnowledgeStore() {
+interface KnowledgeStoreProps {
+  onPurchase: (moduleId: string, moduleName: string) => void;
+}
+
+export default function KnowledgeStore({ onPurchase }: KnowledgeStoreProps) {
   const [modules, setModules] = useState(knowledgeModules);
 
   const handlePurchase = (moduleId: string) => {
+    const module = modules.find(m => m.id === moduleId);
+    if (module && onPurchase) {
+      onPurchase(moduleId, module.name);
+    }
+    
     setModules(prev => 
       prev.map(module => 
         module.id === moduleId 

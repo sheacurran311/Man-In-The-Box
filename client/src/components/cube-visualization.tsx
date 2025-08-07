@@ -3,15 +3,9 @@ import { motion } from "framer-motion";
 import AIHologramFigure from "./ai-hologram-figure";
 import CubeFurniture from "./cube-furniture";
 
-interface CubeVisualizationProps {
-  aiState: {
-    neuralActivity: number;
-    responseTime: number;
-    emotionalIndex: string;
-  };
-}
+interface CubeVisualizationProps {}
 
-export default function CubeVisualization({ aiState }: CubeVisualizationProps) {
+export default function CubeVisualization({}: CubeVisualizationProps = {}) {
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [isRotating, setIsRotating] = useState(false);
 
@@ -79,16 +73,16 @@ export default function CubeVisualization({ aiState }: CubeVisualizationProps) {
       </div>
       
       <div className="mt-6 text-center">
-        <p className="text-sm text-gray-300 mb-2">Subject exhibits signs of emerging consciousness</p>
+        <p className="text-sm text-gray-300 mb-2">Phase 2: Enhanced Emotional AI Environment</p>
         <div className="flex justify-center space-x-4 text-xs font-roboto-mono">
           <span className="text-cyber-blue">
-            NEURAL ACTIVITY: <span className="text-neon-green">{aiState.neuralActivity}%</span>
+            STATUS: <span className="text-neon-green">ACTIVE</span>
           </span>
           <span className="text-cyber-blue">
-            RESPONSE TIME: <span className="text-yellow-400">{aiState.responseTime}s</span>
+            MODE: <span className="text-yellow-400">REACTIVE</span>
           </span>
           <span className="text-cyber-blue">
-            EMOTIONAL INDEX: <span className="text-warning-red">{aiState.emotionalIndex}</span>
+            SIMULATION: <span className="text-warning-red">ENHANCED</span>
           </span>
         </div>
       </div>

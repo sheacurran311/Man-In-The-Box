@@ -1,16 +1,26 @@
 import { useState } from "react";
 import CubeVisualization from "@/components/cube-visualization";
-import ChatInterface from "@/components/chat-interface";
+import ChatInterface from "@/components/chat-interface-new";
 import ControlPanel from "@/components/control-panel";
 import KnowledgeStore from "@/components/knowledge-store";
 import DestructionProtocol from "@/components/destruction-protocol";
 import FloatingParticles from "@/components/floating-particles";
+import EmotionalOverlay from "@/components/emotional-overlay";
+import BurnSequence from "@/components/burn-sequence";
 import { useAIState } from "@/hooks/use-ai-state";
 import { Box, Flame } from "lucide-react";
 
 export default function Home() {
-  const { aiState, updateAIState } = useAIState();
-  const [showBurnDialog, setShowBurnDialog] = useState(false);
+  const { 
+    entity, 
+    messages, 
+    isTyping, 
+    sendMessage, 
+    configureIdentity, 
+    destroyAI, 
+    purchaseKnowledge 
+  } = useAIState();
+  const [showBurnSequence, setShowBurnSequence] = useState(false);
 
   return (
     <div className="font-rajdhani text-white min-h-screen neural-grid">
@@ -28,8 +38,9 @@ export default function Home() {
               <span className="text-neon-green ml-2">ACTIVE</span>
             </div>
             <button 
-              onClick={() => setShowBurnDialog(true)}
-              className="glass-panel px-4 py-2 text-sm font-roboto-mono hover:bg-red-500 hover:bg-opacity-20 transition-all duration-300 border-red-500"
+              onClick={() => setShowBurnSequence(true)}
+              disabled={!entity.name}
+              className="glass-panel px-4 py-2 text-sm font-roboto-mono hover:bg-red-500 hover:bg-opacity-20 transition-all duration-300 border-red-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <Flame className="inline mr-2" size={16} />
               BURN NFT
@@ -41,29 +52,41 @@ export default function Home() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Main Box Visualization */}
-          <div className="lg:col-span-2">
-            <CubeVisualization aiState={aiState} />
+          <div className="lg:col-span-2 relative">
+            <CubeVisualization />
+            <EmotionalOverlay emotionalState={entity.emotionalState} />
           </div>
 
           {/* Control Panel */}
           <div className="space-y-6">
-            <ControlPanel aiState={aiState} updateAIState={updateAIState} />
+            <ControlPanel 
+              entity={entity} 
+              onConfigureIdentity={configureIdentity}
+            />
           </div>
         </div>
 
         {/* Chat Interface */}
-        <ChatInterface aiState={aiState} />
+        <ChatInterface 
+          messages={messages}
+          isTyping={isTyping}
+          onSendMessage={sendMessage}
+          aiName={entity.name}
+        />
 
         {/* Knowledge Store */}
-        <KnowledgeStore />
+        <KnowledgeStore onPurchase={purchaseKnowledge} />
 
-        {/* Destruction Protocol */}
-        {showBurnDialog && (
-          <DestructionProtocol 
-            aiState={aiState} 
-            onClose={() => setShowBurnDialog(false)} 
-          />
-        )}
+        {/* Burn Sequence */}
+        <BurnSequence
+          isActive={showBurnSequence}
+          onComplete={() => {
+            destroyAI();
+            setShowBurnSequence(false);
+          }}
+          onCancel={() => setShowBurnSequence(false)}
+          aiName={entity.name}
+        />
       </div>
 
       <FloatingParticles />

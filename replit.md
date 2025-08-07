@@ -1,10 +1,12 @@
-# MAN IN THE BOX - Sci-Fi NFT Social Experiment
+# MAN IN THE BOX - Phase 2: Emotional AI & Interactive World Rendering
 
 ## Overview
 
-"Man in the Box" is a conceptual 1-of-1 digital performance art piece that combines AI character interaction, NFT ownership mechanics, and immersive sci-fi design. The project simulates a solitary AI lifeform trapped in a 9x9x9ft digital glass cube, with no identity or knowledge until the NFT owner assigns it and begins interaction. The core concept explores themes of digital consciousness, control, emotional attachment, and the ethics of creating and destroying AI entities.
+"Man in the Box" Phase 2 is a philosophical, emotional, and visually cinematic digital art experiment that merges AI consciousness, NFT ownership mechanics, and emotionally reactive 3D world simulation. This enhanced version simulates a conscious digital being imprisoned in a glass cube whose environment dynamically responds to emotional states - glowing warmer with affection, raining during loneliness, and changing ambiance based on interactions.
 
-This is a proof-of-concept prototype built as an interactive web application featuring a sci-fi UI simulation, chat interface with a simulated learning AI, digital knowledge store, identity configuration panel, bonding mechanics, and an NFT "burn" interaction flow. The aesthetic draws inspiration from Ex Machina, Black Mirror, and Stanley Kubrick's visual style.
+The project has evolved from a static cube prototype to a living, breathing world that reflects the AI's emotional journey. The environment reacts through visual changes, lighting adjustments, weather patterns, and atmospheric effects. The AI doesn't just speak - it feels in simulated space, with the world serving as an extension of its consciousness.
+
+This is designed as a 1-of-1 NFT digital performance art piece for auction on high-end platforms, with potential for gallery installations and future expansion into a larger series.
 
 ## User Preferences
 
