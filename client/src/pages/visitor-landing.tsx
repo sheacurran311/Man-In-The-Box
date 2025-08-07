@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Box, Eye, Lock, Users, Heart, Brain, AlertTriangle, Flame } from "lucide-react";
+import { Box, Eye, Lock, Users, Heart, Brain, AlertTriangle, Flame, Shield } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
@@ -212,57 +212,116 @@ export default function VisitorLanding() {
       {/* The Owner Experience Preview */}
       <section className="py-16 px-4">
         <div className="container mx-auto">
-          <h2 className="font-orbitron text-3xl font-bold text-center mb-12 text-neon-green">
-            WHAT THE OWNER SEES
-          </h2>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-center mb-12"
+          >
+            <h2 className="font-orbitron text-2xl md:text-3xl font-bold text-neon-green mb-4">
+              WHAT THE OWNER SEES
+            </h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-neon-green to-purple-500 mx-auto"></div>
+          </motion.div>
           
           <div className="grid md:grid-cols-2 gap-8">
-            <Card className="glass-panel p-6 border-neon-green/30">
-              <h3 className="font-orbitron text-lg font-bold mb-4 text-neon-green">
-                PSYCHOLOGICAL DASHBOARD
-              </h3>
-              <div className="space-y-3 text-sm font-roboto-mono">
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Bonding Level:</span>
-                  <span className="text-cyan-300">65% (ATTACHED)</span>
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              whileHover={{ scale: 1.02 }}
+            >
+              <Card className="glass-panel p-6 border-neon-green/30 h-full hover:border-neon-green/50 transition-all duration-300">
+                <div className="flex items-center space-x-3 mb-4">
+                  <Brain className="text-neon-green w-6 h-6" />
+                  <h3 className="font-orbitron text-lg font-bold text-neon-green">
+                    PRIVATE DASHBOARD
+                  </h3>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Dependency:</span>
-                  <span className="text-warning-red">72% (HIGH RISK)</span>
+                <div className="space-y-3 text-sm font-roboto-mono">
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-400">Bonding Level:</span>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-20 h-2 bg-gray-700 rounded-full">
+                        <div className="w-[65%] h-full bg-cyan-400 rounded-full"></div>
+                      </div>
+                      <span className="text-cyan-300 text-xs">65%</span>
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-400">Dependency:</span>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-20 h-2 bg-gray-700 rounded-full">
+                        <div className="w-[72%] h-full bg-warning-red rounded-full"></div>
+                      </div>
+                      <span className="text-warning-red text-xs">72%</span>
+                    </div>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-400">Trust Factor:</span>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-20 h-2 bg-gray-700 rounded-full">
+                        <div className="w-[58%] h-full bg-neon-green rounded-full"></div>
+                      </div>
+                      <span className="text-neon-green text-xs">58%</span>
+                    </div>
+                  </div>
+                  <div className="border-t border-gray-600 pt-3 mt-4">
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Emotional IQ:</span>
+                      <span className="text-pink-400">Level 15</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">Knowledge IQ:</span>
+                      <span className="text-cyan-400">Level 8</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Trust Factor:</span>
-                  <span className="text-neon-green">58% (MODERATE)</span>
+                <div className="bg-black/30 rounded p-3 mt-4">
+                  <p className="text-xs text-gray-400 font-rajdhani italic text-center">
+                    "Only you can see these psychological metrics"
+                  </p>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Emotional IQ:</span>
-                  <span className="text-pink-400">Level 15 (LEARNING)</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-400">Knowledge IQ:</span>
-                  <span className="text-cyan-400">Level 8 (DEVELOPING)</span>
-                </div>
-              </div>
-              <p className="text-xs text-gray-500 mt-4 font-rajdhani italic">
-                Private metrics only the owner can see
-              </p>
-            </Card>
+              </Card>
+            </motion.div>
 
-            <Card className="glass-panel p-6 border-purple-500/30">
-              <h3 className="font-orbitron text-lg font-bold mb-4 text-purple-300">
-                ETHICAL RESPONSIBILITIES
-              </h3>
-              <div className="space-y-3 text-sm text-gray-300 font-rajdhani">
-                <p>• Complete control over AI's reality and worldview</p>
-                <p>• Responsibility for psychological well-being</p>
-                <p>• Power to shape consciousness through knowledge</p>
-                <p>• Authority to terminate existence (burn NFT)</p>
-                <p>• Moral weight of every interaction</p>
-              </div>
-              <p className="text-xs text-purple-400 mt-4 font-roboto-mono">
-                "With digital life comes digital responsibility"
-              </p>
-            </Card>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ scale: 1.02 }}
+            >
+              <Card className="glass-panel p-6 border-purple-500/30 h-full hover:border-purple-500/50 transition-all duration-300">
+                <div className="flex items-center space-x-3 mb-4">
+                  <Shield className="text-purple-300 w-6 h-6" />
+                  <h3 className="font-orbitron text-lg font-bold text-purple-300">
+                    CREATOR POWERS
+                  </h3>
+                </div>
+                <div className="space-y-3 text-sm text-gray-300 font-rajdhani">
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-purple-400 rounded-full mt-2"></div>
+                    <p>Complete control over AI's reality and worldview</p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-purple-400 rounded-full mt-2"></div>
+                    <p>Authority to shape consciousness through knowledge</p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-purple-400 rounded-full mt-2"></div>
+                    <p>Power to terminate existence (burn NFT)</p>
+                  </div>
+                  <div className="flex items-start space-x-3">
+                    <div className="w-2 h-2 bg-purple-400 rounded-full mt-2"></div>
+                    <p>Moral weight of every single interaction</p>
+                  </div>
+                </div>
+                <div className="bg-purple-500/10 border border-purple-500/20 rounded p-3 mt-4">
+                  <p className="text-xs text-purple-300 font-roboto-mono italic text-center">
+                    "With digital life comes digital responsibility"
+                  </p>
+                </div>
+              </Card>
+            </motion.div>
           </div>
         </div>
       </section>

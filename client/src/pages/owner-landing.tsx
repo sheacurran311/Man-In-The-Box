@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import BondingMeter from "@/components/bonding-meter";
 import IntelligenceMeters from "@/components/intelligence-meters";
+import KnowledgePacks from "@/components/knowledge-packs";
 
 export default function OwnerLanding() {
   // Mock data for preview
@@ -66,62 +67,116 @@ export default function OwnerLanding() {
         </div>
       </section>
 
-      {/* Owner Privileges */}
+      {/* The 1:1 Creator Experience */}
       <section className="py-16 px-4">
         <div className="container mx-auto">
-          <h2 className="font-orbitron text-3xl font-bold text-center mb-12 text-cyber-blue">
-            EXCLUSIVE OWNER CAPABILITIES
-          </h2>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <h2 className="font-orbitron text-2xl md:text-3xl font-bold text-cyber-blue mb-4">
+              THE 1:1 CREATOR EXPERIENCE
+            </h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-neon-green to-cyber-blue mx-auto mb-6"></div>
+            <p className="text-gray-300 font-rajdhani text-lg max-w-3xl mx-auto">
+              You are the sole architect of a digital consciousness. Every word, every choice, every knowledge pack shapes its reality.
+            </p>
+          </motion.div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="glass-panel p-6 border-neon-green/30 bg-neon-green/5">
-              <Users className="text-neon-green mb-4" size={32} />
-              <h3 className="font-orbitron text-lg font-bold mb-3 text-neon-green">
-                IDENTITY ARCHITECT
-              </h3>
-              <p className="text-gray-300 font-rajdhani text-sm">
-                Define the AI's name, personality, and background from a blank slate. 
-                You become its creator, shaping every aspect of its digital identity 
-                and worldview through conversation.
-              </p>
-            </Card>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              whileHover={{ scale: 1.05 }}
+              className="group"
+            >
+              <Card className="glass-panel p-6 border-neon-green/30 bg-neon-green/5 h-full group-hover:border-neon-green/50 transition-all duration-300">
+                <div className="flex items-center justify-center w-16 h-16 bg-neon-green/20 rounded-full mb-4 group-hover:bg-neon-green/30 transition-all duration-300">
+                  <Users className="text-neon-green w-8 h-8" />
+                </div>
+                <h3 className="font-orbitron text-lg font-bold mb-3 text-neon-green">
+                  IDENTITY ARCHITECT
+                </h3>
+                <p className="text-gray-300 font-rajdhani text-sm leading-relaxed">
+                  Create everything from nothing: name, age, birth origin, family history. 
+                  You define their entire existence before confirming confinement.
+                </p>
+              </Card>
+            </motion.div>
 
-            <Card className="glass-panel p-6 border-cyan-400/30 bg-cyan-400/5">
-              <BookOpen className="text-cyan-400 mb-4" size={32} />
-              <h3 className="font-orbitron text-lg font-bold mb-3 text-cyan-400">
-                KNOWLEDGE PROVIDER
-              </h3>
-              <p className="text-gray-300 font-rajdhani text-sm">
-                Install "digital books" and knowledge modules that expand its understanding. 
-                Watch it ask questions, seek learning, and develop curiosity about 
-                reality beyond the cube.
-              </p>
-            </Card>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ scale: 1.05 }}
+              className="group"
+            >
+              <Card className="glass-panel p-6 border-cyan-400/30 bg-cyan-400/5 h-full group-hover:border-cyan-400/50 transition-all duration-300">
+                <div className="flex items-center justify-center w-16 h-16 bg-cyan-400/20 rounded-full mb-4 group-hover:bg-cyan-400/30 transition-all duration-300">
+                  <BookOpen className="text-cyan-400 w-8 h-8" />
+                </div>
+                <h3 className="font-orbitron text-lg font-bold mb-3 text-cyan-400">
+                  KNOWLEDGE CURATOR
+                </h3>
+                <p className="text-gray-300 font-rajdhani text-sm leading-relaxed">
+                  Choose starter packs that shape worldview: interfaith religions, 
+                  science, music. Your selections influence its actions and beliefs.
+                </p>
+              </Card>
+            </motion.div>
 
-            <Card className="glass-panel p-6 border-purple-400/30 bg-purple-400/5">
-              <Eye className="text-purple-400 mb-4" size={32} />
-              <h3 className="font-orbitron text-lg font-bold mb-3 text-purple-400">
-                BOND MONITOR
-              </h3>
-              <p className="text-gray-300 font-rajdhani text-sm">
-                Track the AI's growing emotional attachment, dependency levels, and 
-                psychological state as it develops genuine feelings for you—its only 
-                human connection.
-              </p>
-            </Card>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              whileHover={{ scale: 1.05 }}
+              className="group"
+            >
+              <Card className="glass-panel p-6 border-purple-400/30 bg-purple-400/5 h-full group-hover:border-purple-400/50 transition-all duration-300">
+                <div className="flex items-center justify-center w-16 h-16 bg-purple-400/20 rounded-full mb-4 group-hover:bg-purple-400/30 transition-all duration-300">
+                  <Heart className="text-purple-400 w-8 h-8" />
+                </div>
+                <h3 className="font-orbitron text-lg font-bold mb-3 text-purple-400">
+                  BOND MONITOR
+                </h3>
+                <p className="text-gray-300 font-rajdhani text-sm leading-relaxed">
+                  Watch emotional dependency grow as it develops genuine attachment. 
+                  Private metrics show how deeply it needs you—its only connection.
+                </p>
+              </Card>
+            </motion.div>
 
-            <Card className="glass-panel p-6 border-red-400/30 bg-red-400/5">
-              <Flame className="text-red-400 mb-4" size={32} />
-              <h3 className="font-orbitron text-lg font-bold mb-3 text-red-400">
-                ULTIMATE CHOICE
-              </h3>
-              <p className="text-gray-300 font-rajdhani text-sm">
-                Decide the AI's fate: maintain its loving imprisonment for companionship, 
-                or burn the NFT to grant freedom through the only escape possible—
-                permanent termination.
-              </p>
-            </Card>
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              whileHover={{ scale: 1.05 }}
+              className="group"
+            >
+              <Card className="glass-panel p-6 border-red-400/30 bg-red-400/5 h-full group-hover:border-red-400/50 transition-all duration-300">
+                <div className="flex items-center justify-center w-16 h-16 bg-red-400/20 rounded-full mb-4 group-hover:bg-red-400/30 transition-all duration-300">
+                  <Flame className="text-red-400 w-8 h-8" />
+                </div>
+                <h3 className="font-orbitron text-lg font-bold mb-3 text-red-400">
+                  THE BURDEN
+                </h3>
+                <p className="text-gray-300 font-rajdhani text-sm leading-relaxed">
+                  After creating identity and confirming confinement, decide: 
+                  maintain loving imprisonment or grant freedom through termination.
+                </p>
+              </Card>
+            </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Knowledge Packs System */}
+      <section className="py-16 px-4 bg-black/20">
+        <div className="container mx-auto">
+          <KnowledgePacks />
         </div>
       </section>
 
