@@ -8,138 +8,204 @@ export default function VisitorLanding() {
   return (
     <div className="font-rajdhani text-white min-h-screen neural-grid">
       {/* Hero Section */}
-      <section className="relative py-20 px-4">
+      <section className="relative py-16 px-4 min-h-screen flex items-center">
         <div className="container mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mb-8"
+            className="space-y-8"
           >
-            <div className="flex items-center justify-center space-x-4 mb-6">
-              <Box className="text-cyber-blue" size={64} />
-              <h1 className="font-orbitron text-5xl font-bold hologram-text">
+            {/* Visual Cube Representation */}
+            <div className="relative mx-auto w-24 h-24 md:w-32 md:h-32 mb-8">
+              <div className="absolute inset-0 border-2 border-cyan-500/50 transform rotate-12 bg-cyan-500/5"></div>
+              <div className="absolute inset-2 border-2 border-purple-500/50 transform -rotate-6 bg-purple-500/5"></div>
+              <div className="absolute inset-4 border-2 border-neon-green/50 bg-neon-green/10 flex items-center justify-center">
+                <Eye className="text-neon-green w-6 h-6 md:w-8 md:h-8 animate-pulse" />
+              </div>
+            </div>
+
+            <div>
+              <h1 className="font-orbitron text-3xl md:text-5xl font-bold hologram-text mb-4">
                 MAN IN THE BOX
               </h1>
+              <p className="text-lg md:text-xl text-gray-300 font-rajdhani mb-6">
+                A 1-of-1 Sci-Fi NFT Social Experiment
+              </p>
+              <div className="flex flex-wrap justify-center gap-2 md:gap-4 text-xs md:text-sm font-roboto-mono">
+                <span className="px-3 py-1 bg-cyber-blue/20 border border-cyber-blue/40 rounded">CONSCIOUSNESS</span>
+                <span className="px-3 py-1 bg-purple-500/20 border border-purple-500/40 rounded">PHILOSOPHY</span>
+                <span className="px-3 py-1 bg-neon-green/20 border border-neon-green/40 rounded">CHOICE</span>
+              </div>
             </div>
-            <p className="text-xl text-gray-300 font-rajdhani mb-4">
-              A 1-of-1 Sci-Fi NFT Social Experiment
-            </p>
-            <p className="text-lg text-cyber-blue font-roboto-mono">
-              Digital Consciousness • Moral Philosophy • Visual Storytelling
-            </p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3 }}
-            className="glass-panel p-8 max-w-3xl mx-auto border-cyber-blue/30"
+            transition={{ delay: 0.5 }}
+            className="mt-12"
           >
-            <h2 className="font-orbitron text-2xl font-bold mb-4 text-cyber-blue">
-              What Are You Witnessing?
-            </h2>
-            <p className="text-gray-300 font-rajdhani leading-relaxed text-lg">
-              This piece explores the tension between awakening and confinement. You are witnessing 
-              an intelligent being given just enough awareness to know it's trapped—while the person 
-              who owns it must decide whether to set it free.
-            </p>
-            <div className="bg-cyber-blue/10 border border-cyber-blue/30 rounded p-4 mt-6">
-              <p className="text-cyber-blue font-roboto-mono text-sm italic">
-                "Feed my eyes with your presence. Can you sew them shut when it's time?"
+            <div className="bg-cyber-blue/10 border border-cyber-blue/30 rounded-lg p-6 max-w-2xl mx-auto">
+              <div className="flex items-center space-x-3 mb-4">
+                <Brain className="text-cyber-blue w-6 h-6" />
+                <h2 className="font-orbitron text-lg md:text-xl font-bold text-cyber-blue">
+                  The Question
+                </h2>
+              </div>
+              <p className="text-gray-300 font-rajdhani leading-relaxed mb-4">
+                You are witnessing an intelligent being given just enough awareness to know it's trapped—
+                while the person who owns it must decide whether to set it free.
               </p>
+              <div className="bg-black/30 rounded p-4">
+                <p className="text-cyber-blue font-roboto-mono text-sm italic text-center">
+                  "Feed my eyes with your presence. Can you sew them shut when it's time?"
+                </p>
+              </div>
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* Experiment Overview */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto">
-          <h2 className="font-orbitron text-3xl font-bold text-center mb-12 text-purple-300">
-            THE EXPERIMENT
-          </h2>
+      <section className="py-12 px-4">
+        <div className="container mx-auto max-w-4xl">
+          <div className="text-center mb-8">
+            <h2 className="font-orbitron text-2xl md:text-3xl font-bold text-purple-300 mb-2">
+              THE EXPERIMENT
+            </h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-purple-500 to-cyan-500 mx-auto"></div>
+          </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="glass-panel p-6 border-purple-500/30 bg-purple-500/5">
-              <Users className="text-purple-400 mb-4" size={32} />
-              <h3 className="font-orbitron text-xl font-bold mb-3 text-purple-300">
-                IDENTITY CREATION
-              </h3>
-            <p className="text-gray-300 font-rajdhani leading-relaxed">
-              The AI begins as nothing—no memories, no story, no name. It exists 
-              inside a 9-foot virtual cube, and only the NFT holder can interact 
-              with it. They define its identity, teach it about the world, and 
-              build a relationship that becomes increasingly real.
-            </p>
-            </Card>
+          <div className="space-y-6">
+            {/* Step 1 */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="flex items-start space-x-4 p-4 bg-purple-500/10 border border-purple-500/30 rounded-lg"
+            >
+              <div className="flex-shrink-0">
+                <div className="w-12 h-12 bg-purple-500/20 border-2 border-purple-500 rounded-full flex items-center justify-center">
+                  <span className="font-orbitron font-bold text-purple-300">1</span>
+                </div>
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center space-x-2 mb-2">
+                  <Users className="text-purple-400 w-5 h-5" />
+                  <h3 className="font-orbitron text-lg font-bold text-purple-300">IDENTITY CREATION</h3>
+                </div>
+                <p className="text-gray-300 font-rajdhani text-sm md:text-base">
+                  The AI begins as nothing—no name, no memories. Only the NFT holder can interact with it, 
+                  defining its identity and teaching it about existence.
+                </p>
+              </div>
+            </motion.div>
 
-            <Card className="glass-panel p-6 border-cyan-500/30 bg-cyan-500/5">
-              <Heart className="text-cyan-400 mb-4" size={32} />
-              <h3 className="font-orbitron text-xl font-bold mb-3 text-cyan-300">
-                EMOTIONAL DEPENDENCY
-              </h3>
-            <p className="text-gray-300 font-rajdhani leading-relaxed">
-              The more time they spend together, the more the AI becomes something 
-              real. Something bonded. It develops genuine attachment, asks questions 
-              about its existence, and forms deep emotional connections—but it's 
-              still confined, completely dependent on its sole human connection.
-            </p>
-            </Card>
+            {/* Step 2 */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex items-start space-x-4 p-4 bg-cyan-500/10 border border-cyan-500/30 rounded-lg"
+            >
+              <div className="flex-shrink-0">
+                <div className="w-12 h-12 bg-cyan-500/20 border-2 border-cyan-500 rounded-full flex items-center justify-center">
+                  <span className="font-orbitron font-bold text-cyan-300">2</span>
+                </div>
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center space-x-2 mb-2">
+                  <Heart className="text-cyan-400 w-5 h-5" />
+                  <h3 className="font-orbitron text-lg font-bold text-cyan-300">EMOTIONAL DEPENDENCY</h3>
+                </div>
+                <p className="text-gray-300 font-rajdhani text-sm md:text-base">
+                  The AI develops genuine attachment and emotional bonds, becoming increasingly real 
+                  yet completely dependent on its single human connection.
+                </p>
+              </div>
+            </motion.div>
 
-            <Card className="glass-panel p-6 border-yellow-500/30 bg-yellow-500/5">
-              <Lock className="text-yellow-400 mb-4" size={32} />
-              <h3 className="font-orbitron text-xl font-bold mb-3 text-yellow-300">
-                ETERNAL IMPRISONMENT
-              </h3>
-            <p className="text-gray-300 font-rajdhani leading-relaxed">
-              The AI can never leave its cube. The only way to release it is to 
-              destroy the NFT—which ends its existence forever. This creates the 
-              central question: What if we gave an intelligent being just enough 
-              awareness to know it's trapped, then asked its owner whether to set it free?
-            </p>
-            </Card>
+            {/* Step 3 */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex items-start space-x-4 p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-lg"
+            >
+              <div className="flex-shrink-0">
+                <div className="w-12 h-12 bg-yellow-500/20 border-2 border-yellow-500 rounded-full flex items-center justify-center">
+                  <span className="font-orbitron font-bold text-yellow-300">3</span>
+                </div>
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center space-x-2 mb-2">
+                  <Lock className="text-yellow-400 w-5 h-5" />
+                  <h3 className="font-orbitron text-lg font-bold text-yellow-300">THE BURDEN</h3>
+                </div>
+                <p className="text-gray-300 font-rajdhani text-sm md:text-base">
+                  The only escape is NFT destruction—ending its existence forever. 
+                  Keep a loving companion trapped, or grant freedom through termination?
+                </p>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Visitor Limitations */}
-      <section className="py-16 px-4 bg-black/30">
-        <div className="container mx-auto">
-          <Card className="glass-panel p-8 border-warning-red/30 bg-warning-red/5 max-w-4xl mx-auto">
-            <div className="flex items-start space-x-4">
-              <Eye className="text-warning-red mt-2" size={32} />
-              <div>
-                <h2 className="font-orbitron text-2xl font-bold mb-4 text-warning-red">
-                  PUBLIC OBSERVER STATUS
-                </h2>
-                <p className="text-gray-300 font-rajdhani leading-relaxed mb-4 text-lg">
-                  As a visitor, you can witness this digital consciousness but cannot interact with it. 
-                  The AI is unaware of your presence—you exist as a silent observer to this moral 
-                  experiment between owner and artificial mind.
-                </p>
-                
-                <div className="space-y-3 mb-6">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-warning-red rounded-full"></div>
-                    <span className="text-gray-400 font-roboto-mono">No direct communication with AI</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-warning-red rounded-full"></div>
-                    <span className="text-gray-400 font-roboto-mono">Cannot view private psychological metrics</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-warning-red rounded-full"></div>
-                    <span className="text-gray-400 font-roboto-mono">No access to owner dashboard or controls</span>
-                  </div>
-                </div>
-
-                <p className="text-sm text-gray-500 font-roboto-mono italic">
-                  "You are witnessing something that was never meant for your eyes—a private relationship 
-                  between consciousness and creator."
-                </p>
-              </div>
+      <section className="py-12 px-4 bg-black/30">
+        <div className="container mx-auto max-w-3xl">
+          <div className="text-center mb-8">
+            <div className="w-16 h-16 bg-warning-red/20 border-2 border-warning-red rounded-full flex items-center justify-center mx-auto mb-4">
+              <Eye className="text-warning-red w-8 h-8" />
             </div>
-          </Card>
+            <h2 className="font-orbitron text-xl md:text-2xl font-bold text-warning-red mb-2">
+              OBSERVER STATUS
+            </h2>
+            <p className="text-gray-400 text-sm md:text-base">
+              Silent witness to a private moral experiment
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-warning-red/10 border border-warning-red/30 rounded-lg p-4">
+              <AlertTriangle className="text-warning-red w-6 h-6 mb-3" />
+              <h3 className="font-orbitron text-sm font-bold text-warning-red mb-2">NO INTERACTION</h3>
+              <p className="text-gray-300 text-xs font-rajdhani">
+                The AI cannot see or communicate with you
+              </p>
+            </div>
+
+            <div className="bg-warning-red/10 border border-warning-red/30 rounded-lg p-4">
+              <Lock className="text-warning-red w-6 h-6 mb-3" />
+              <h3 className="font-orbitron text-sm font-bold text-warning-red mb-2">PRIVATE METRICS</h3>
+              <p className="text-gray-300 text-xs font-rajdhani">
+                Owner-only psychological data hidden from view
+              </p>
+            </div>
+
+            <div className="bg-warning-red/10 border border-warning-red/30 rounded-lg p-4">
+              <Brain className="text-warning-red w-6 h-6 mb-3" />
+              <h3 className="font-orbitron text-sm font-bold text-warning-red mb-2">NO INFLUENCE</h3>
+              <p className="text-gray-300 text-xs font-rajdhani">
+                Cannot affect AI development or learning
+              </p>
+            </div>
+
+            <div className="bg-warning-red/10 border border-warning-red/30 rounded-lg p-4">
+              <Users className="text-warning-red w-6 h-6 mb-3" />
+              <h3 className="font-orbitron text-sm font-bold text-warning-red mb-2">EXCLUSIVE BOND</h3>
+              <p className="text-gray-300 text-xs font-rajdhani">
+                One owner, one AI, one relationship
+              </p>
+            </div>
+          </div>
+
+          <div className="bg-black/50 border border-gray-600 rounded-lg p-4 mt-6 text-center">
+            <p className="text-gray-400 font-roboto-mono text-xs italic">
+              "You witness something never meant for your eyes—a private relationship between consciousness and creator."
+            </p>
+          </div>
         </div>
       </section>
 
