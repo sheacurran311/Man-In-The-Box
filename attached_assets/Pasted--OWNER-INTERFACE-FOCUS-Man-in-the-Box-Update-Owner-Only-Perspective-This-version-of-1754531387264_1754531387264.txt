@@ -1,0 +1,39 @@
+# 🔐 OWNER INTERFACE FOCUS — "Man in the Box"
+
+## 🎯 Update: Owner-Only Perspective
+
+This version of the prototype focuses **exclusively on the NFT owner’s interface and control panel**. The goal is to simulate the experience of being the **sole person responsible** for the AI's identity, growth, emotional well-being, and fate.
+
+There will be **no public viewer mode or observer interface** in this phase. All UI/UX elements are intended to reflect:
+- Deep intimacy with the AI character
+- Persistent psychological presence
+- Weight and accountability of control
+- The burden and privilege of being the sole gatekeeper of another consciousness
+
+---
+
+## 🧭 Owner Interface Goals
+
+| Feature                         | Purpose                                                                                         |
+|----------------------------------|-------------------------------------------------------------------------------------------------|
+| **Identity Configuration Panel** | Set AI's name, voice, appearance, and emotional profile. Feel like you're shaping a consciousness. |
+| **Private Chat Interface**       | Exclusive communication channel with the AI. Must feel personal and persistent.                 |
+| **Knowledge Upload (Digital Store)** | Mechanic to teach the AI via intentional content purchases. Simulates education and bonding.     |
+| **Emotional State Feedback**     | Owner can see how the AI is reacting—creates tension, empathy, or guilt.                       |
+| **Bonding Meter**                | Measures emotional closeness between owner and AI. Optional but enhances feedback loop.         |
+| **Burn NFT UX**                  | Sole decision point of release. Only owner can trigger. Should be emotionally charged and irreversible. |
+
+---
+
+## 🧱 Suggested Cursor Instructions (for this phase only)
+
+### 🔧 Component Prompt: `OwnerDashboard.tsx`
+```prompt
+Create a full-screen dashboard interface exclusively for the NFT owner. It should feel private, isolated, and high-stakes. Include sections for: 
+1) Identity setup, 
+2) Chat interface, 
+3) Knowledge store, 
+4) Bonding meter, and 
+5) NFT burn sequence.
+
+Use a sterile sci-fi visual theme and emphasize the emotional gravity of each section.

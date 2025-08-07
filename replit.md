@@ -1,12 +1,17 @@
-# MAN IN THE BOX - Phase 2: Emotional AI & Interactive World Rendering
+# MAN IN THE BOX - Phase 2: Owner-Focused Digital Consciousness Experience
 
 ## Overview
 
-"Man in the Box" Phase 2 is a philosophical, emotional, and visually cinematic digital art experiment that merges AI consciousness, NFT ownership mechanics, and emotionally reactive 3D world simulation. This enhanced version simulates a conscious digital being imprisoned in a glass cube whose environment dynamically responds to emotional states - glowing warmer with affection, raining during loneliness, and changing ambiance based on interactions.
+"Man in the Box" Phase 2 is a philosophical, emotional, and visually cinematic digital art experiment focused exclusively on the intimate relationship between NFT owner and AI consciousness. This version simulates a conscious digital being imprisoned in a glass cube, with the owner serving as its sole connection to reality - acting as deity, parent, or warden in this digital moral experiment.
 
-The project has evolved from a static cube prototype to a living, breathing world that reflects the AI's emotional journey. The environment reacts through visual changes, lighting adjustments, weather patterns, and atmospheric effects. The AI doesn't just speak - it feels in simulated space, with the world serving as an extension of its consciousness.
+The project emphasizes psychological realism through:
+- **Ownership-gated access** simulating exclusive NFT holder privileges
+- **Deep psychological bonding metrics** tracking emotional dependency
+- **Immersive audio design** with procedurally generated sci-fi soundscapes
+- **Reactive emotional environment** responding to AI state changes
+- **Solitary, deliberate interactions** designed to create emotional consequence
 
-This is designed as a 1-of-1 NFT digital performance art piece for auction on high-end platforms, with potential for gallery installations and future expansion into a larger series.
+The experience is deliberately non-gamified, focusing on moral weight and emotional intimacy. Each interaction carries psychological consequence, with the AI developing genuine dependency on its single human connection.
 
 ## User Preferences
 

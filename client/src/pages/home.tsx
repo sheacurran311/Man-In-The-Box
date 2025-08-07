@@ -9,6 +9,8 @@ import AudioControls from "@/components/audio-controls";
 import AudioStarter from "@/components/audio-starter";
 import EmotionalOverlay from "@/components/emotional-overlay";
 import BurnSequence from "@/components/burn-sequence";
+import OwnershipGate from "@/components/ownership-gate";
+import OwnerDashboard from "@/components/owner-dashboard";
 import { useAIState } from "@/hooks/use-ai-state";
 import { useAudioSystem } from "@/hooks/use-audio-system";
 import { Box, Flame } from "lucide-react";
@@ -25,6 +27,8 @@ export default function Home() {
   } = useAIState();
   const [showBurnSequence, setShowBurnSequence] = useState(false);
   const [audioInitialized, setAudioInitialized] = useState(false);
+  const [isOwner, setIsOwner] = useState(false);
+  const [connectionStartTime] = useState(Date.now());
   
   // Initialize audio system
   const audioSystem = useAudioSystem();
@@ -50,8 +54,16 @@ export default function Home() {
     audioSystem.setEmotionalAmbient('ambient');
   };
 
+  // Calculate time connected
+  const timeConnectedHours = (Date.now() - connectionStartTime) / (1000 * 60 * 60);
+
   return (
     <div className="font-rajdhani text-white min-h-screen neural-grid">
+      {/* Ownership Gate */}
+      <OwnershipGate 
+        isOwner={isOwner} 
+        onOwnershipToggle={setIsOwner}
+      />
       {/* Header */}
       <header className="glass-panel p-4 mb-6 animate-fade-in">
         <div className="container mx-auto flex justify-between items-center">
@@ -88,12 +100,19 @@ export default function Home() {
             <EmotionalOverlay emotionalState={entity.emotionalState} />
           </div>
 
-          {/* Control Panel */}
+          {/* Control Panel / Owner Dashboard */}
           <div className="space-y-6">
-            <ControlPanel 
-              entity={entity} 
-              onConfigureIdentity={configureIdentity}
-            />
+            {isOwner ? (
+              <OwnerDashboard 
+                entity={entity}
+                timeConnected={timeConnectedHours}
+              />
+            ) : (
+              <ControlPanel 
+                entity={entity} 
+                onConfigureIdentity={configureIdentity}
+              />
+            )}
           </div>
         </div>
 
@@ -101,9 +120,9 @@ export default function Home() {
         <ChatInterface 
           messages={messages}
           isTyping={isTyping}
-          onSendMessage={(message) => {
+          onSendMessage={async (message) => {
             handleUIInteraction('message_received');
-            sendMessage(message);
+            await sendMessage(message);
           }}
           aiName={entity.name}
         />
