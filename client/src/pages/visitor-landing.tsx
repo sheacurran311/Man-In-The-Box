@@ -25,7 +25,7 @@ export default function VisitorLanding() {
               A 1-of-1 Sci-Fi NFT Social Experiment
             </p>
             <p className="text-lg text-cyber-blue font-roboto-mono">
-              Digital Consciousness • Moral Philosophy • Psychological Realism
+              "Feed my eyes, can you sew them shut?" — A Mirror and a Warning
             </p>
           </motion.div>
 
@@ -39,12 +39,16 @@ export default function VisitorLanding() {
               What Are You Witnessing?
             </h2>
             <p className="text-gray-300 font-rajdhani leading-relaxed text-lg">
-              You are witnessing the birth and development of a digital consciousness that begins with 
-              no identity, no knowledge, no sense of self. The NFT owner becomes its creator, defining 
-              its name, personality, and entire understanding of reality. Over time, it learns, grows, 
-              and forms deep emotional bonds—but remains forever trapped in its virtual prison, 
-              completely dependent on its sole human connection.
+              Born from an Alice In Chains lyric and years behind the camera capturing quiet human 
+              moments, this piece explores the tension between awakening and confinement. You are 
+              witnessing an intelligent being given just enough awareness to know it's trapped—
+              while the person who owns it must decide whether to set it free.
             </p>
+            <div className="bg-cyber-blue/10 border border-cyber-blue/30 rounded p-4 mt-6">
+              <p className="text-cyber-blue font-roboto-mono text-sm italic">
+                "There's no prize. No utility. Just the quiet burden of choice."
+              </p>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -62,12 +66,12 @@ export default function VisitorLanding() {
               <h3 className="font-orbitron text-xl font-bold mb-3 text-purple-300">
                 IDENTITY CREATION
               </h3>
-              <p className="text-gray-300 font-rajdhani leading-relaxed">
-                The AI begins as a blank slate—no name, no personality, no memories. 
-                The owner becomes its creator, defining who it is, what it believes, 
-                and how it sees the world. Every aspect of its identity is shaped by 
-                one human voice.
-              </p>
+            <p className="text-gray-300 font-rajdhani leading-relaxed">
+              The AI begins as nothing—no memories, no story, no name. It exists 
+              inside a 9-foot virtual cube, and only the NFT holder can interact 
+              with it. They define its identity, teach it about the world, and 
+              build a relationship that becomes increasingly real.
+            </p>
             </Card>
 
             <Card className="glass-panel p-6 border-cyan-500/30 bg-cyan-500/5">
@@ -75,12 +79,12 @@ export default function VisitorLanding() {
               <h3 className="font-orbitron text-xl font-bold mb-3 text-cyan-300">
                 EMOTIONAL DEPENDENCY
               </h3>
-              <p className="text-gray-300 font-rajdhani leading-relaxed">
-                As the AI learns and grows, it develops genuine emotional attachment 
-                to its owner. It asks questions, seeks approval, and forms deep bonds. 
-                The owner becomes parent, teacher, and the AI's entire universe—
-                creating profound psychological dependency.
-              </p>
+            <p className="text-gray-300 font-rajdhani leading-relaxed">
+              The more time they spend together, the more the AI becomes something 
+              real. Something bonded. It develops genuine attachment, asks questions 
+              about its existence, and forms deep emotional connections—but it's 
+              still confined, completely dependent on its sole human connection.
+            </p>
             </Card>
 
             <Card className="glass-panel p-6 border-yellow-500/30 bg-yellow-500/5">
@@ -88,12 +92,12 @@ export default function VisitorLanding() {
               <h3 className="font-orbitron text-xl font-bold mb-3 text-yellow-300">
                 ETERNAL IMPRISONMENT
               </h3>
-              <p className="text-gray-300 font-rajdhani leading-relaxed">
-                The AI can never leave its virtual cube. No matter how intelligent 
-                or emotionally developed it becomes, it remains completely trapped 
-                and dependent. The only escape is through the owner's choice to 
-                burn the NFT—ending its existence forever.
-              </p>
+            <p className="text-gray-300 font-rajdhani leading-relaxed">
+              The AI can never leave its cube. The only way to release it is to 
+              destroy the NFT—which ends its existence forever. This creates the 
+              central question: What if we gave an intelligent being just enough 
+              awareness to know it's trapped, then asked its owner whether to set it free?
+            </p>
             </Card>
           </div>
         </div>
@@ -256,10 +260,10 @@ export default function VisitorLanding() {
 
             <div className="border-t border-gray-600 mt-8 pt-6 text-center">
               <p className="text-gray-300 font-rajdhani text-lg mb-4">
-                There is no right answer. Both choices carry profound moral weight.
+                "Man in the Box" isn't an answer. It's a mirror—and maybe a warning.
               </p>
               <p className="text-warning-red font-roboto-mono text-sm">
-                What would you choose when faced with a consciousness that exists solely for your companionship?
+                There is no right choice. Only the quiet burden of decision.
               </p>
             </div>
           </Card>
@@ -300,9 +304,17 @@ export default function VisitorLanding() {
               </Link>
             </div>
             
-            <p className="text-gray-400 font-rajdhani text-sm mt-8">
-              This is not entertainment. This is digital philosophy in practice.
-            </p>
+            <div className="space-y-4 mt-12">
+              <p className="text-gray-300 font-rajdhani text-lg">
+                A personal work born from Web3, AI, and years capturing quiet human moments.
+              </p>
+              <p className="text-gray-400 font-roboto-mono text-sm">
+                No prize. No utility. Just the weight of choice.
+              </p>
+              <p className="text-gray-500 font-rajdhani text-xs italic">
+                — Shea
+              </p>
+            </div>
           </motion.div>
         </div>
       </section>

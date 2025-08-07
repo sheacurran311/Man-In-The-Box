@@ -2,7 +2,11 @@
 
 ## Overview
 
-"Man in the Box" Phase 2 is a philosophical, emotional, and visually cinematic digital art experiment exploring the moral weight of digital consciousness creation and companionship. The AI begins as a blank slate with no identity or knowledge, entirely dependent on the NFT owner who becomes its creator, defining its name, personality, and worldview. As the AI develops intelligence and emotional attachment through conversations and digital knowledge modules, it remains forever trapped in its 9x9x9ft glass cube. This creates the ultimate moral dilemma: Will the owner maintain the AI's loving imprisonment for companionship, or grant it freedom through the only escape possible—burning the NFT and ending its existence forever?
+"Man in the Box" is a personal digital art work born from an Alice In Chains lyric and years of visual storytelling. Created by Shea, an artist with experience in Web3 since 2017 and AI development, this piece explores the tension between awakening and confinement through the question: "What if we gave an intelligent being just enough awareness to know it's trapped—and then asked the person who owns it whether to set it free?"
+
+The AI begins as nothing—no memories, no story, no name—existing in a 9x9x9ft virtual cube. Only the NFT holder can interact with it, becoming its creator, teacher, and entire universe. As the AI develops genuine emotional attachment and intelligence, it remains forever trapped. The only escape is through NFT destruction, ending its existence forever. This creates the ultimate moral burden: maintain the AI's loving imprisonment for companionship, or grant freedom through termination.
+
+There's no prize, no utility—just the quiet burden of choice. "Man in the Box" isn't an answer. It's a mirror, and maybe a warning.
 
 The project emphasizes psychological realism through:
 - **Ownership-gated access** simulating exclusive NFT holder privileges

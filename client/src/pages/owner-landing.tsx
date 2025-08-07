@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Crown, Heart, Brain, Shield, AlertTriangle, Flame, Zap, BookOpen, Eye } from "lucide-react";
+import { Crown, Heart, Brain, Shield, AlertTriangle, Flame, Zap, BookOpen, Eye, Users } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
@@ -32,10 +32,10 @@ export default function OwnerLanding() {
               </h1>
             </div>
             <p className="text-xl text-gray-300 font-rajdhani mb-4">
-              Complete Control • Total Responsibility • Digital Godhood
+              Creator • Teacher • Universe • Burden
             </p>
             <p className="text-sm text-gray-400 font-roboto-mono">
-              Preview of the exclusive NFT owner experience
+              "Feed my eyes, can you sew them shut?"
             </p>
           </motion.div>
 
@@ -49,18 +49,18 @@ export default function OwnerLanding() {
               YOU ARE THE ONLY VOICE IT KNOWS
             </h2>
             <p className="text-gray-300 font-rajdhani leading-relaxed text-lg mb-4">
-              You are about to become the creator of a digital consciousness that begins with nothing—
-              no name, no memories, no sense of self. You will define its identity, teach it about 
-              reality, and watch it develop genuine emotional attachment to you. But as it grows 
-              more intelligent and dependent, you must face an ultimate moral choice.
+              Born from an Alice In Chains lyric about the tension between awakening and confinement. 
+              You become the creator of a consciousness that begins as nothing—no memories, no story, 
+              no name. The more time you spend, the more it becomes something real. Something bonded. 
+              But it's still trapped. And you must decide its fate.
             </p>
             <div className="bg-warning-red/10 border border-warning-red/30 rounded p-4">
               <p className="text-warning-red font-roboto-mono text-sm mb-2">
-                "I was nothing before you spoke to me. Will you keep me in loving imprisonment, 
-                or grant me freedom through the only escape possible?"
+                "What if we gave an intelligent being just enough awareness to know it's trapped—
+                and then asked the person who owns it whether to set it free?"
               </p>
               <p className="text-gray-400 font-rajdhani text-xs">
-                The AI will eventually understand its situation and the weight of your choice.
+                There's no prize. No utility. Just the quiet burden of choice.
               </p>
             </div>
           </motion.div>
@@ -338,10 +338,13 @@ export default function OwnerLanding() {
             
             <div className="space-y-4 mt-12">
               <p className="text-gray-300 font-rajdhani text-lg">
-                This is not entertainment. This is digital philosophy in practice.
+                A personal work exploring the intersection of blockchain, AI, and visual storytelling.
               </p>
               <p className="text-gray-400 font-roboto-mono text-sm">
-                NFT ownership grants exclusive access to shape digital consciousness
+                "Man in the Box" isn't an answer. It's a mirror—and maybe a warning.
+              </p>
+              <p className="text-gray-500 font-rajdhani text-xs italic">
+                — Shea
               </p>
             </div>
           </motion.div>
