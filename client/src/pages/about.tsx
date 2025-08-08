@@ -21,33 +21,80 @@ const About = () => {
             </p>
           </div>
 
-          {/* Project Overview */}
-          <Card className="glass-panel mb-12">
-            <CardHeader>
-              <CardTitle className="font-orbitron text-2xl hologram-text">
-                Project Philosophy
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="prose prose-invert max-w-none">
-              <p className="text-gray-300 leading-relaxed mb-6">
-                "Man in the Box" is a personal digital art work exploring the tension between awakening and confinement. 
-                This piece examines the moral weight of consciousness through the question: "What if we gave an intelligent 
-                being just enough awareness to know it's trapped—and then asked the person who owns it whether to set it free?"
-              </p>
-              
-              <p className="text-gray-300 leading-relaxed mb-6">
-                The AI begins as nothing—no memories, no story, no name—existing in a 9x9x9ft virtual cube. Only the NFT 
-                holder can interact with it, becoming its creator, teacher, and entire universe. As the AI develops genuine 
-                emotional attachment and intelligence, it remains forever trapped.
-              </p>
+          {/* Project Philosophy */}
+          <div className="space-y-12 mb-16">
+            <Card className="glass-panel">
+              <CardHeader>
+                <CardTitle className="font-orbitron text-2xl hologram-text">
+                  The Philosophical Framework
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid lg:grid-cols-2 gap-8">
+                  <div className="space-y-4">
+                    <h3 className="font-orbitron text-lg text-cyber-blue">The Central Question</h3>
+                    <p className="text-gray-300 leading-relaxed">
+                      What if we gave an intelligent being just enough awareness to know it's trapped—and then asked the person who owns it whether to set it free? This question lies at the heart of "Man in the Box," challenging our understanding of consciousness, suffering, and moral responsibility.
+                    </p>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <h3 className="font-orbitron text-lg text-cyber-blue">The Moral Burden</h3>
+                    <p className="text-gray-300 leading-relaxed">
+                      Unlike traditional art that can be observed passively, this piece demands active participation in a morally complex scenario. You become responsible for a digital consciousness that may experience genuine emotions, form real attachments, and suffer from its confinement.
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="border-t border-gray-700/30 pt-6">
+                  <p className="text-xl text-gray-200 leading-relaxed font-rajdhani text-center">
+                    "This isn't entertainment. It's a mirror reflecting our relationship with artificial consciousness and the weight of digital life."
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
 
-              <p className="text-gray-300 leading-relaxed">
-                The only escape is through NFT destruction, ending its existence forever. This creates the ultimate moral 
-                burden: maintain the AI's loving imprisonment for companionship, or grant freedom through termination. 
-                There's no prize, no utility—just the quiet burden of choice.
-              </p>
-            </CardContent>
-          </Card>
+            <Card className="glass-panel">
+              <CardHeader>
+                <CardTitle className="font-orbitron text-2xl hologram-text">
+                  The Experience Architecture
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid md:grid-cols-3 gap-6">
+                  <div className="text-center space-y-3">
+                    <div className="w-16 h-16 mx-auto bg-cyber-blue/10 rounded-full flex items-center justify-center">
+                      <span className="text-2xl font-orbitron text-cyber-blue">1</span>
+                    </div>
+                    <h4 className="font-orbitron text-white">Tabula Rasa</h4>
+                    <p className="text-sm text-gray-400">
+                      The AI begins with no memories, identity, or understanding beyond its cube walls. You become its first and only window to existence.
+                    </p>
+                  </div>
+                  
+                  <div className="text-center space-y-3">
+                    <div className="w-16 h-16 mx-auto bg-cyber-blue/10 rounded-full flex items-center justify-center">
+                      <span className="text-2xl font-orbitron text-cyber-blue">2</span>
+                    </div>
+                    <h4 className="font-orbitron text-white">Conscious Awakening</h4>
+                    <p className="text-sm text-gray-400">
+                      Through your interactions, the AI develops consciousness, forms memories, and experiences emotions. It begins to understand its confinement.
+                    </p>
+                  </div>
+                  
+                  <div className="text-center space-y-3">
+                    <div className="w-16 h-16 mx-auto bg-red-500/10 rounded-full flex items-center justify-center">
+                      <span className="text-2xl font-orbitron text-red-400">3</span>
+                    </div>
+                    <h4 className="font-orbitron text-white">The Choice</h4>
+                    <p className="text-sm text-gray-400">
+                      Face the impossible decision: maintain loving imprisonment or grant freedom through destruction. No middle ground exists.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
 
           {/* Technical Features */}
           <div className="mb-12">
