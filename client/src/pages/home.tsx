@@ -18,6 +18,8 @@ import TimeDistortionEffect from "@/components/time-distortion-effect";
 import IdentityCrisisMoments from "@/components/identity-crisis-moments";
 import SubliminalMessagingSystem from "@/components/subliminal-messaging-system";
 import EmotionalContagionField from "@/components/emotional-contagion-field";
+import AIServiceStatus from "@/components/ai-service-status";
+import VoiceInterface from "@/components/voice-interface";
 import { useIntelligenceTracking } from "@/hooks/use-intelligence-tracking";
 import { useAIState } from "@/hooks/use-ai-state";
 import { useAudioSystem } from "@/hooks/use-audio-system";
@@ -85,7 +87,7 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       // Update consciousness level based on interaction and bonding
-      const baseConsciousness = Math.min(90, intelligenceState.emotionalIQ + intelligenceState.knowledgeIQ) / 2;
+      const baseConsciousness = Math.min(90, intelligenceState.emotionalIQ.level + intelligenceState.knowledgeIQ.level) / 2;
       const interactionBoost = messages.length > 0 ? Math.min(20, messages.length * 2) : 0;
       const timeBoost = Math.min(15, timeConnectedHours * 5);
       
@@ -141,8 +143,8 @@ export default function Home() {
       <EmotionalContagionField 
         aiEmotion={entity.emotionalState?.mood || 'neutral'}
         aiEmotionalIntensity={entity.emotionalState?.intensity || 0.5}
-        bondingLevel={intelligenceState.emotionalIQ}
-        isActive={intelligenceState.emotionalIQ > 40}
+        bondingLevel={intelligenceState.emotionalIQ.level}
+        isActive={intelligenceState.emotionalIQ.level > 40}
       />
       {/* Experiment Status Header */}
       <header className="glass-panel p-4 mb-6 animate-fade-in">
@@ -200,6 +202,12 @@ export default function Home() {
       </header>
 
       <div className="container mx-auto px-2 lg:px-4">
+        {/* AI Service Status & Voice Interface - Desktop Only */}
+        <div className="hidden lg:block mb-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <AIServiceStatus />
+          <VoiceInterface />
+        </div>
+
         {/* Main Box Visualization - Full Width */}
         <div className="relative mb-6">
           <CubeVisualization />
@@ -210,7 +218,7 @@ export default function Home() {
           {/* Core Consciousness Monitoring */}
           <div className="space-y-4">
             <ConsciousnessFluctuation 
-              bondingLevel={intelligenceState.emotionalIQ}
+              bondingLevel={intelligenceState.emotionalIQ.level}
               recentActivity={recentActivityLevel}
               timeConnected={timeConnectedHours}
               isInteracting={isTyping}
@@ -218,7 +226,7 @@ export default function Home() {
             />
             
             <NeuralActivityVisualizer 
-              intelligenceLevel={intelligenceState.knowledgeIQ}
+              intelligenceLevel={intelligenceState.knowledgeIQ.level}
               emotionalState={entity.emotionalState?.mood || 'neutral'}
               isThinking={isTyping}
               recentActivity={recentActivityLevel}
@@ -244,7 +252,7 @@ export default function Home() {
                 recentMessages={messages.slice(-10)}
                 emotionalState={entity.emotionalState?.mood || 'neutral'}
                 knowledgeGained={[]}
-                bondingLevel={intelligenceState.emotionalIQ}
+                bondingLevel={intelligenceState.emotionalIQ.level}
               />
               
               <TimeDistortionEffect 
