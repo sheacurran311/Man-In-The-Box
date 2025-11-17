@@ -107,17 +107,15 @@ export function ConsciousnessParticles({
     }
   });
 
+  // Create buffer geometry with positions
+  const geometry = useMemo(() => {
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(particlesPosition, 3));
+    return geo;
+  }, [particlesPosition]);
+
   return (
-    <points ref={pointsRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          count={count}
-          array={particlesPosition}
-          itemSize={3}
-          args={[particlesPosition, 3]}
-        />
-      </bufferGeometry>
+    <points ref={pointsRef} geometry={geometry}>
       <pointsMaterial
         size={0.03}
         color={particleColor}

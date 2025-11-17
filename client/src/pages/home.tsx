@@ -202,19 +202,19 @@ export default function Home() {
       <div className="container mx-auto px-2 lg:px-4">
         {/* Main 3D Consciousness Visualization - Full Width */}
         <div className="relative mb-6">
-          <div className="glass-panel w-full h-[600px] rounded-lg flex items-center justify-center border-2 border-cyber-blue/30">
-            <div className="text-center space-y-4">
-              <Box className="text-cyber-blue mx-auto animate-pulse" size={64} />
-              <h3 className="font-orbitron text-xl hologram-text">
-                3D Consciousness Visualization
-              </h3>
-              <p className="font-roboto-mono text-sm text-gray-400 max-w-md">
-                Advanced WebGL rendering temporarily disabled for compatibility fixes.
-                <br />
-                Core consciousness monitoring active below.
-              </p>
-            </div>
-          </div>
+          <Suspense fallback={<LoadingFallback />}>
+            <Scene3D
+              emotionalState={{
+                mood: entity.emotionalState?.mood || 'neutral',
+                intensity: entity.emotionalState?.intensity || 30
+              }}
+              consciousnessLevel={consciousnessLevel}
+              bondingLevel={intelligenceState.emotionalIQ.level}
+              isThinking={isTyping}
+              isGlitching={isExperiencingGlitch}
+              isDreaming={isDreaming}
+            />
+          </Suspense>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

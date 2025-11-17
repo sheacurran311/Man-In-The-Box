@@ -25,6 +25,13 @@ export function EnvironmentEffects({ consciousnessLevel, emotionalState }: Envir
     return positions;
   }, []);
 
+  // Create buffer geometry for data streams
+  const dataStreamGeometry = useMemo(() => {
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(dataStreamPositions, 3));
+    return geo;
+  }, [dataStreamPositions]);
+
   useFrame((state, delta) => {
     // Animate data streams
     if (dataStreamRef.current) {
@@ -55,16 +62,7 @@ export function EnvironmentEffects({ consciousnessLevel, emotionalState }: Envir
       />
 
       {/* Data stream particles - neural activity visualization */}
-      <points ref={dataStreamRef}>
-        <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            count={200}
-            array={dataStreamPositions}
-            itemSize={3}
-            args={[dataStreamPositions, 3]}
-          />
-        </bufferGeometry>
+      <points ref={dataStreamRef} geometry={dataStreamGeometry}>
         <pointsMaterial
           size={0.05}
           color="#00d9ff"

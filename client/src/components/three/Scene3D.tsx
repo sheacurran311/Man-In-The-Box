@@ -2,8 +2,9 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Environment } from '@react-three/drei';
 import { EffectComposer, Bloom, ChromaticAberration, Noise } from '@react-three/postprocessing';
 import { BlendFunction } from 'postprocessing';
-import { Suspense, useMemo } from 'react';
+import { Suspense, useMemo, useState, useEffect } from 'react';
 import { Vector2 } from 'three';
+import { Box } from 'lucide-react';
 import { GlassPrison } from './GlassPrison';
 import { AIHologram } from './AIHologram';
 import { ConsciousnessParticles } from './ConsciousnessParticles';
@@ -31,13 +32,54 @@ export function Scene3D({
   isGlitching = false,
   isDreaming = false
 }: Scene3DProps) {
+  const [webglSupported, setWebglSupported] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    // Detect WebGL support
+    try {
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      setWebglSupported(!!gl);
+    } catch (e) {
+      setWebglSupported(false);
+    }
+  }, []);
+
   const chromaticOffset = useMemo(
     () => isGlitching ? new Vector2(0.002, 0.002) : new Vector2(0, 0),
     [isGlitching]
   );
 
+  // Show fallback if WebGL is not supported
+  if (webglSupported === false) {
+    return (
+      <div className="w-full h-[600px] rounded-lg overflow-hidden">
+        <div className="glass-panel w-full h-full flex items-center justify-center border-2 border-cyber-blue/30">
+          <div className="text-center space-y-4">
+            <Box className="text-cyber-blue mx-auto animate-pulse" size={64} />
+            <h3 className="font-orbitron text-xl hologram-text">
+              Consciousness Visualization
+            </h3>
+            <p className="font-roboto-mono text-sm text-gray-400 max-w-md px-4">
+              WebGL is not available in this environment.
+              <br />
+              <span className="text-xs text-gray-500">
+                (3D rendering requires hardware acceleration)
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Show loading while detecting
+  if (webglSupported === null) {
+    return <LoadingFallback />;
+  }
+
   return (
-    <div className="w-full h-[600px] rounded-lg overflow-hidden">
+    <div className="w-full h-[600px] rounded-lg overflow-hidden" data-testid="scene3d-container">
       <Canvas
         shadows
         gl={{
