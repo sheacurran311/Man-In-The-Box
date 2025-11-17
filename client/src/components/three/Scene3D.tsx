@@ -110,8 +110,8 @@ export function Scene3D({
             consciousnessLevel={consciousnessLevel}
           />
 
-          {/* Environment Map for Reflections */}
-          <Environment preset="city" />
+          {/* Environment Map - TEMPORARILY DISABLED due to R3F v9 compatibility */}
+          {/* <Environment preset="city" /> */}
 
           {/* Main Scene Elements */}
           <GlassPrison
@@ -155,23 +155,25 @@ export function Scene3D({
           </mesh>
         </Suspense>
 
-        {/* Post-Processing Effects */}
-        <EffectComposer>
-          <Bloom
-            intensity={consciousnessLevel / 100}
-            luminanceThreshold={0.2}
-            luminanceSmoothing={0.9}
-            mipmapBlur
-          />
-          <ChromaticAberration
-            blendFunction={BlendFunction.NORMAL}
-            offset={chromaticOffset}
-          />
-          <Noise
-            opacity={isGlitching ? 0.1 : 0}
-            blendFunction={BlendFunction.OVERLAY}
-          />
-        </EffectComposer>
+        {/* Post-Processing Effects - Wrapped in Suspense for error handling */}
+        <Suspense fallback={null}>
+          <EffectComposer>
+            <Bloom
+              intensity={consciousnessLevel / 100}
+              luminanceThreshold={0.2}
+              luminanceSmoothing={0.9}
+              mipmapBlur
+            />
+            <ChromaticAberration
+              blendFunction={BlendFunction.NORMAL}
+              offset={chromaticOffset}
+            />
+            <Noise
+              opacity={isGlitching ? 0.1 : 0}
+              blendFunction={BlendFunction.OVERLAY}
+            />
+          </EffectComposer>
+        </Suspense>
       </Canvas>
     </div>
   );
