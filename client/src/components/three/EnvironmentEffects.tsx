@@ -33,11 +33,18 @@ export function EnvironmentEffects({ consciousnessLevel, emotionalState }: Envir
     return positions;
   }, []);
 
-  // Create buffer geometry for data streams
-  const dataStreamGeometry = useMemo(() => {
-    const geo = new THREE.BufferGeometry();
-    geo.setAttribute('position', new THREE.BufferAttribute(dataStreamPositions, 3));
-    return geo;
+  // Set data stream geometry imperatively (R3F v9 compatible)
+  useEffect(() => {
+    if (dataStreamRef.current) {
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(dataStreamPositions, 3));
+      dataStreamRef.current.geometry = geo;
+
+      // Cleanup
+      return () => {
+        geo.dispose();
+      };
+    }
   }, [dataStreamPositions]);
 
   useFrame((state, delta) => {
@@ -65,7 +72,7 @@ export function EnvironmentEffects({ consciousnessLevel, emotionalState }: Envir
       {/* Fog is set imperatively in useEffect (see above) */}
 
       {/* Data stream particles - neural activity visualization */}
-      <points ref={dataStreamRef} geometry={dataStreamGeometry}>
+      <points ref={dataStreamRef}>
         <pointsMaterial
           size={0.05}
           color="#00d9ff"
