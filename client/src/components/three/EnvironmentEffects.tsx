@@ -1,5 +1,5 @@
-import { useRef, useMemo } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useRef, useMemo, useEffect } from 'react';
+import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
 interface EnvironmentEffectsProps {
@@ -11,8 +11,16 @@ interface EnvironmentEffectsProps {
 }
 
 export function EnvironmentEffects({ consciousnessLevel, emotionalState }: EnvironmentEffectsProps) {
-  const fogRef = useRef<THREE.Fog>(null);
+  const { scene } = useThree();
   const dataStreamRef = useRef<THREE.Points>(null);
+
+  // Set fog imperatively on the scene (R3F v9 compatible)
+  useEffect(() => {
+    scene.fog = new THREE.Fog('#000000', 10, 30);
+    return () => {
+      scene.fog = null;
+    };
+  }, [scene]);
 
   // Generate data stream particles (neural connections visual)
   const dataStreamPositions = useMemo(() => {
@@ -54,12 +62,7 @@ export function EnvironmentEffects({ consciousnessLevel, emotionalState }: Envir
 
   return (
     <>
-      {/* Fog for depth and atmosphere */}
-      <fog
-        ref={fogRef}
-        attach="fog"
-        args={['#000000', 10, 30]}
-      />
+      {/* Fog is set imperatively in useEffect (see above) */}
 
       {/* Data stream particles - neural activity visualization */}
       <points ref={dataStreamRef} geometry={dataStreamGeometry}>
