@@ -1,4 +1,4 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useMemo, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -107,15 +107,22 @@ export function ConsciousnessParticles({
     }
   });
 
-  // Create buffer geometry with positions
-  const geometry = useMemo(() => {
-    const geo = new THREE.BufferGeometry();
-    geo.setAttribute('position', new THREE.BufferAttribute(particlesPosition, 3));
-    return geo;
+  // Set geometry imperatively (R3F v9 compatible)
+  useEffect(() => {
+    if (pointsRef.current) {
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.BufferAttribute(particlesPosition, 3));
+      pointsRef.current.geometry = geo;
+
+      // Cleanup
+      return () => {
+        geo.dispose();
+      };
+    }
   }, [particlesPosition]);
 
   return (
-    <points ref={pointsRef} geometry={geometry}>
+    <points ref={pointsRef}>
       <pointsMaterial
         size={0.03}
         color={particleColor}
