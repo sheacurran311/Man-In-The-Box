@@ -103,7 +103,7 @@ export function logConfigStatus() {
   console.log('\n🔧 Configuration Status:');
   console.log(`   Environment: ${config.NODE_ENV}`);
   console.log(`   Port: ${config.PORT}`);
-  console.log('\n🤖 AI Services:`);
+  console.log('\n🤖 AI Services:');
   console.log(`   Claude API: ${services.ai.claude ? '✅' : '❌ Not configured'}`);
   console.log(`   Genie 3: ${services.ai.genie ? '✅' : '❌ Not configured'}`);
   console.log(`   Replicate: ${services.ai.replicate ? '✅' : '❌ Not configured'}`);
