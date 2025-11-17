@@ -2,7 +2,8 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, Environment } from '@react-three/drei';
 import { EffectComposer, Bloom, ChromaticAberration, Noise } from '@react-three/postprocessing';
 import { BlendFunction } from 'postprocessing';
-import { Suspense } from 'react';
+import { Suspense, useMemo } from 'react';
+import { Vector2 } from 'three';
 import { GlassPrison } from './GlassPrison';
 import { AIHologram } from './AIHologram';
 import { ConsciousnessParticles } from './ConsciousnessParticles';
@@ -30,6 +31,11 @@ export function Scene3D({
   isGlitching = false,
   isDreaming = false
 }: Scene3DProps) {
+  const chromaticOffset = useMemo(
+    () => isGlitching ? new Vector2(0.002, 0.002) : new Vector2(0, 0),
+    [isGlitching]
+  );
+
   return (
     <div className="w-full h-[600px] rounded-lg overflow-hidden">
       <Canvas
@@ -117,7 +123,7 @@ export function Scene3D({
           />
           <ChromaticAberration
             blendFunction={BlendFunction.NORMAL}
-            offset={isGlitching ? [0.002, 0.002] : [0, 0]}
+            offset={chromaticOffset}
           />
           <Noise
             opacity={isGlitching ? 0.1 : 0}
