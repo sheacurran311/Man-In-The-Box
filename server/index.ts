@@ -4,8 +4,13 @@ import { setupVite, serveStatic, log } from "./vite";
 import { config, logConfigStatus, services } from "./config";
 import { WebSocketManager } from "./websocket";
 import { createServer } from "http";
+import { initializeSentry, addSentryErrorHandler } from "./monitoring/sentry";
 
 const app = express();
+
+// Initialize Sentry (must be first)
+initializeSentry(app);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -59,9 +64,9 @@ app.get("/api/health", (_req: Request, res: Response) => {
 
 // Register API routes
 (async () => {
-  const server = registerRoutes(app);
+  const server = await registerRoutes(app);
 
-  // Error handling
+  // Error handling (before Sentry handler)
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
@@ -69,6 +74,9 @@ app.get("/api/health", (_req: Request, res: Response) => {
     res.status(status).json({ message });
     console.error(err);
   });
+
+  // Add Sentry error handler (must be after routes, before vite)
+  addSentryErrorHandler(app);
 
   // Setup vite or static serving
   if (app.get("env") === "development") {

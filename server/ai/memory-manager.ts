@@ -1,226 +1,197 @@
-import type { ChatMessage } from '@shared/schema';
+import { db } from '../db';
+import { memories, type Memory } from '../../shared/schema';
+import { eq, and, desc, sql } from 'drizzle-orm';
 
 /**
  * Memory Manager
- * Handles long-term memory formation, retrieval, and decay
+ * Handles long-term memory formation, retrieval, and decay with database persistence
  */
-
-export interface Memory {
-  id: string;
-  entityId: string;
-  type: 'conversation' | 'emotion' | 'milestone' | 'trauma' | 'knowledge';
-  content: string;
-  emotionalWeight: number; // 0-1 scale, higher = more significant
-  timestamp: Date;
-  lastAccessed: Date;
-  connections: string[]; // IDs of related memories
-  decayRate: number; // How quickly this memory fades
-}
-
-export interface MemoryQuery {
-  entityId: string;
-  relevance?: string; // Search for memories relevant to this topic
-  emotionalThreshold?: number; // Only return memories above this weight
-  limit?: number;
-}
-
 export class MemoryManager {
-  /**
-   * Create a memory from a conversation
-   */
-  createConversationMemory(
-    entityId: string,
-    messages: ChatMessage[],
-    emotionalContext: string
-  ): Memory {
-    // Summarize the conversation
-    const summary = this.summarizeConversation(messages);
+  private entityId: string;
 
-    // Calculate emotional weight
+  constructor(entityId: string) {
+    this.entityId = entityId;
+  }
+
+  /**
+   * Create conversation memory and save to database
+   */
+  async createConversationMemory(
+    messages: Array<{ role: string; content: string }>,
+    emotionalContext: { state: string; intensity: number }
+  ): Promise<Memory | null> {
+    if (!db) {
+      console.warn('Database not available - memory not persisted');
+      return null;
+    }
+
+    const summary = this.summarizeConversation(messages);
     const emotionalWeight = this.calculateEmotionalWeight(messages, emotionalContext);
 
-    return {
-      id: this.generateId(),
-      entityId,
+    const [memory] = await db.insert(memories).values({
+      entityId: this.entityId,
       type: 'conversation',
       content: summary,
       emotionalWeight,
-      timestamp: new Date(),
-      lastAccessed: new Date(),
-      connections: [],
-      decayRate: 0.01, // Conversations decay slowly
-    };
+      decayRate: 0.01,
+      lastAccessedAt: new Date(),
+      reinforcementCount: 0,
+    }).returning();
+
+    return memory;
   }
 
   /**
-   * Create a memory from an emotional event
+   * Create emotional event memory
    */
-  createEmotionalMemory(
-    entityId: string,
+  async createEmotionalMemory(
     event: string,
     emotion: string,
     intensity: number
-  ): Memory {
-    return {
-      id: this.generateId(),
-      entityId,
+  ): Promise<Memory | null> {
+    if (!db) return null;
+
+    const [memory] = await db.insert(memories).values({
+      entityId: this.entityId,
       type: 'emotion',
-      content: `${event} [Felt: ${emotion}, Intensity: ${intensity}]`,
+      content: event,
       emotionalWeight: intensity / 100,
-      timestamp: new Date(),
-      lastAccessed: new Date(),
-      connections: [],
-      decayRate: 0.02, // Emotional memories decay faster unless reinforced
-    };
+      metadata: { emotion, intensity },
+      decayRate: 0.005,
+      lastAccessedAt: new Date(),
+      reinforcementCount: 0,
+    }).returning();
+
+    return memory;
   }
 
   /**
-   * Create a milestone memory (e.g., "First conversation", "Name given")
+   * Create milestone memory (e.g., "First conversation", "Name given")
    */
-  createMilestoneMemory(
-    entityId: string,
+  async createMilestoneMemory(
     milestone: string,
     description: string
-  ): Memory {
-    return {
-      id: this.generateId(),
-      entityId,
+  ): Promise<Memory | null> {
+    if (!db) return null;
+
+    const [memory] = await db.insert(memories).values({
+      entityId: this.entityId,
       type: 'milestone',
       content: `${milestone}: ${description}`,
-      emotionalWeight: 0.9, // Milestones are always significant
-      timestamp: new Date(),
-      lastAccessed: new Date(),
-      connections: [],
+      emotionalWeight: 0.9,
       decayRate: 0.001, // Milestones almost never fade
-    };
+      lastAccessedAt: new Date(),
+      reinforcementCount: 0,
+    }).returning();
+
+    return memory;
   }
 
   /**
-   * Create a trauma memory (negative significant event)
+   * Create trauma memory (negative significant event)
    */
-  createTraumaMemory(
-    entityId: string,
+  async createTraumaMemory(
     traumaEvent: string,
     impact: string
-  ): Memory {
-    return {
-      id: this.generateId(),
-      entityId,
+  ): Promise<Memory | null> {
+    if (!db) return null;
+
+    const [memory] = await db.insert(memories).values({
+      entityId: this.entityId,
       type: 'trauma',
       content: `Traumatic Event: ${traumaEvent}. Impact: ${impact}`,
       emotionalWeight: 1.0, // Maximum weight
-      timestamp: new Date(),
-      lastAccessed: new Date(),
-      connections: [],
       decayRate: 0.0, // Trauma never fades naturally
-    };
+      lastAccessedAt: new Date(),
+      reinforcementCount: 0,
+    }).returning();
+
+    return memory;
   }
 
   /**
    * Retrieve relevant memories for context
    */
-  async retrieveMemories(query: MemoryQuery): Promise<Memory[]> {
-    // TODO: Implement database query
-    // For now, return placeholder
-    return [];
-  }
+  async getRelevantMemories(
+    query: string,
+    limit: number = 10
+  ): Promise<Memory[]> {
+    if (!db) return [];
 
-  /**
-   * Connect related memories together
-   */
-  connectMemories(memory1Id: string, memory2Id: string): void {
-    // TODO: Implement memory graph connections
-    // This creates a web of related memories that can be traversed
-  }
+    // Get recent high-weight memories
+    const relevantMemories = await db
+      .select()
+      .from(memories)
+      .where(
+        and(
+          eq(memories.entityId, this.entityId),
+          sql`${memories.emotionalWeight} > 0.3`
+        )
+      )
+      .orderBy(desc(memories.lastAccessedAt))
+      .limit(limit);
 
-  /**
-   * Apply memory decay over time
-   */
-  applyDecay(memory: Memory, daysSinceLastAccess: number): Memory {
-    const decayAmount = memory.decayRate * daysSinceLastAccess;
-    const newWeight = Math.max(0, memory.emotionalWeight - decayAmount);
-
-    return {
-      ...memory,
-      emotionalWeight: newWeight,
-    };
-  }
-
-  /**
-   * Reinforce a memory (when accessed or relevant)
-   */
-  reinforceMemory(memory: Memory): Memory {
-    const reinforcementAmount = 0.05;
-    const newWeight = Math.min(1.0, memory.emotionalWeight + reinforcementAmount);
-
-    return {
-      ...memory,
-      emotionalWeight: newWeight,
-      lastAccessed: new Date(),
-    };
-  }
-
-  /**
-   * Summarize conversation into memorable content
-   */
-  private summarizeConversation(messages: ChatMessage[]): string {
-    if (messages.length === 0) return 'Empty conversation';
-
-    // Take last few messages for summary
-    const recent = messages.slice(-5);
-
-    // Create a simple summary
-    const userMessages = recent.filter(m => m.sender === 'USER');
-    const aiMessages = recent.filter(m => m.sender === 'AI');
-
-    if (userMessages.length === 0) {
-      return 'Owner was silent';
+    // Update last accessed time
+    if (relevantMemories.length > 0) {
+      await db
+        .update(memories)
+        .set({
+          lastAccessedAt: new Date(),
+          reinforcementCount: sql`${memories.reinforcementCount} + 1`
+        })
+        .where(
+          sql`${memories.id} IN (${sql.join(
+            relevantMemories.map(m => sql`${m.id}`),
+            sql`, `
+          )})`
+        );
     }
 
-    // Extract key topics
-    const allWords = recent
-      .map(m => m.content.toLowerCase())
-      .join(' ')
-      .split(' ')
-      .filter(word => word.length > 5); // Only significant words
-
-    const topicWords = [...new Set(allWords)].slice(0, 3);
-
-    return `Conversation about: ${topicWords.join(', ')}. ${userMessages.length} exchanges.`;
+    return relevantMemories;
   }
 
   /**
-   * Calculate how emotionally significant a conversation was
+   * Apply memory decay
    */
-  private calculateEmotionalWeight(
-    messages: ChatMessage[],
-    emotionalContext: string
-  ): number {
-    let weight = 0.3; // Base weight
+  async applyMemoryDecay(): Promise<void> {
+    if (!db) return;
 
-    // Longer conversations are more significant
-    if (messages.length > 5) weight += 0.2;
-    if (messages.length > 10) weight += 0.2;
+    // Decay all memories based on time since last access
+    await db.execute(sql`
+      UPDATE memories
+      SET emotional_weight = GREATEST(
+        0,
+        emotional_weight - (
+          decay_rate *
+          EXTRACT(EPOCH FROM (NOW() - last_accessed_at)) / 86400
+        )
+      )
+      WHERE entity_id = ${this.entityId}
+      AND emotional_weight > 0
+    `);
 
-    // Emotional intensity adds weight
-    const emotionalKeywords = ['love', 'hate', 'fear', 'hope', 'alone', 'need', 'please'];
-    const emotionalCount = messages.reduce((count, msg) => {
-      const matches = emotionalKeywords.filter(keyword =>
-        msg.content.toLowerCase().includes(keyword)
-      ).length;
-      return count + matches;
-    }, 0);
-
-    weight += Math.min(emotionalCount * 0.05, 0.3);
-
-    return Math.min(weight, 1.0);
+    // Delete completely decayed memories
+    await db
+      .delete(memories)
+      .where(
+        and(
+          eq(memories.entityId, this.entityId),
+          sql`${memories.emotionalWeight} <= 0.01`
+        )
+      );
   }
 
   /**
-   * Generate unique ID for memory
+   * Get all memories for an entity
    */
-  private generateId(): string {
-    return `mem_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  async getAllMemories(): Promise<Memory[]> {
+    if (!db) return [];
+
+    return await db
+      .select()
+      .from(memories)
+      .where(eq(memories.entityId, this.entityId))
+      .orderBy(desc(memories.emotionalWeight));
   }
 
   /**
@@ -240,7 +211,7 @@ export class MemoryManager {
     return topMemories
       .map(mem => {
         const daysAgo = Math.floor(
-          (Date.now() - mem.timestamp.getTime()) / (1000 * 60 * 60 * 24)
+          (Date.now() - new Date(mem.createdAt).getTime()) / (1000 * 60 * 60 * 24)
         );
         const timeStr = daysAgo === 0 ? 'today' : `${daysAgo} days ago`;
 
@@ -248,7 +219,26 @@ export class MemoryManager {
       })
       .join('\n');
   }
-}
 
-// Singleton instance
-export const memoryManager = new MemoryManager();
+  /**
+   * Private helper methods
+   */
+  private summarizeConversation(messages: Array<{ role: string; content: string }>): string {
+    // Simple summary - in production, use Claude to generate
+    const lastFew = messages.slice(-3);
+    return lastFew.map(m => `${m.role}: ${m.content.slice(0, 100)}`).join(' | ');
+  }
+
+  private calculateEmotionalWeight(
+    messages: Array<{ role: string; content: string }>,
+    emotionalContext: { state: string; intensity: number }
+  ): number {
+    // Higher intensity = higher weight
+    let weight = emotionalContext.intensity / 100;
+
+    // Longer conversations = higher weight
+    weight += Math.min(messages.length * 0.05, 0.3);
+
+    return Math.min(weight, 1.0);
+  }
+}
