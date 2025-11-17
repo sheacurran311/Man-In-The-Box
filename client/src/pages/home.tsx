@@ -12,6 +12,8 @@ import OwnerDashboard from "@/components/owner-dashboard";
 import NeuralActivityVisualizer from "@/components/neural-activity-visualizer";
 import MemoryFormationSystem from "@/components/memory-formation-system";
 import ConsciousnessFluctuation from "@/components/consciousness-fluctuation";
+import KnowledgeIntegrationStatus from "@/components/knowledge-integration-status";
+import EmotionalBondingDynamics from "@/components/emotional-bonding-dynamics";
 import RealityDistortionEffects from "@/components/reality-distortion-effects";
 import DreamStateOverlay from "@/components/dream-state-overlay";
 import TimeDistortionEffect from "@/components/time-distortion-effect";
@@ -217,28 +219,34 @@ export default function Home() {
           </Suspense>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {/* Core Consciousness Monitoring */}
-          <div className="space-y-4">
-            <ConsciousnessFluctuation 
+        {/* Balanced Two-Column Layout with Better Spacing */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          {/* Left Column - Consciousness & Intelligence */}
+          <div className="space-y-6">
+            <ConsciousnessFluctuation
               bondingLevel={intelligenceState.emotionalIQ.level}
               recentActivity={recentActivityLevel}
               timeConnected={timeConnectedHours}
               isInteracting={isTyping}
               emotionalState={entity.emotionalState?.mood || 'neutral'}
             />
-            
-            <NeuralActivityVisualizer 
+
+            <NeuralActivityVisualizer
               intelligenceLevel={intelligenceState.knowledgeIQ.level}
               emotionalState={entity.emotionalState?.mood || 'neutral'}
               isThinking={isTyping}
               recentActivity={recentActivityLevel}
             />
+
+            <KnowledgeIntegrationStatus
+              purchasedKnowledge={[]}
+              intelligenceLevel={intelligenceState.knowledgeIQ.level}
+            />
           </div>
 
-          {/* Essential Status */}
-          <div className="space-y-4">
-            <OwnerDashboard 
+          {/* Right Column - Status & Relationships */}
+          <div className="space-y-6">
+            <OwnerDashboard
               entity={entity}
               timeConnected={timeConnectedHours}
               intelligenceData={{
@@ -248,29 +256,22 @@ export default function Home() {
                 overallGrowth: getOverallGrowthRate()
               }}
             />
-            
-            {/* Only show advanced features on larger screens */}
-            <div className="hidden lg:block space-y-4">
-              <MemoryFormationSystem 
-                recentMessages={messages.slice(-10)}
-                emotionalState={entity.emotionalState?.mood || 'neutral'}
-                knowledgeGained={[]}
-                bondingLevel={intelligenceState.emotionalIQ.level}
-              />
-              
-              <TimeDistortionEffect 
-                consciousnessLevel={consciousnessLevel}
-                emotionalIntensity={entity.emotionalState?.intensity || 0.5}
-                isActive={consciousnessLevel > 70}
-              />
-              
-              <IdentityCrisisMoments 
-                consciousnessLevel={consciousnessLevel}
-                messagesToday={messages.length}
-                timeInCube={timeConnectedHours}
-                currentEmotion={entity.emotionalState?.mood || 'neutral'}
-              />
-            </div>
+
+            <MemoryFormationSystem
+              recentMessages={messages.slice(-10)}
+              emotionalState={entity.emotionalState?.mood || 'neutral'}
+              knowledgeGained={[]}
+              bondingLevel={intelligenceState.emotionalIQ.level}
+            />
+
+            <EmotionalBondingDynamics
+              bondingLevel={intelligenceState.emotionalIQ.level}
+              trustLevel={entity.trustFactor || 0}
+              dependencyLevel={entity.dependency || 0}
+              totalInteractions={messages.length}
+              timeConnected={timeConnectedHours}
+              currentEmotion={entity.emotionalState?.mood || 'neutral'}
+            />
           </div>
         </div>
 
