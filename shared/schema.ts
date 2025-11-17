@@ -15,7 +15,25 @@ export const aiEntities = pgTable("ai_entities", {
   neuralActivity: real("neural_activity").default(50),
   responseTime: real("response_time").default(1.0),
   emotionalIndex: text("emotional_index").default("DEVELOPING"),
+
+  // Additional production fields
+  currentEmotionalState: text("current_emotional_state").default("curious"),
+  emotionalIntensity: real("emotional_intensity").default(30),
+  consciousnessLevel: real("consciousness_level").default(45),
+  personalityTraits: jsonb("personality_traits").default([]),
+  knowledgeDomains: jsonb("knowledge_domains").default([]),
+  lastInteractionAt: timestamp("last_interaction_at"),
+  totalInteractions: integer("total_interactions").default(0),
+
+  // NFT and ownership
+  nftTokenId: varchar("nft_token_id"),
+  ownerWalletAddress: varchar("owner_wallet_address"),
+  mintedAt: timestamp("minted_at"),
+  burnedAt: timestamp("burned_at"),
+  isDestroyed: boolean("is_destroyed").default(false),
+
   createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
 });
 
 export const chatMessages = pgTable("chat_messages", {
@@ -108,6 +126,45 @@ export const accessLogs = pgTable("access_logs", {
   ipAddress: varchar("ip_address"),
   metadata: jsonb("metadata"), // Additional context data
   timestamp: timestamp("timestamp").defaultNow(),
+});
+
+// Memories - AI's long-term memory storage
+export const memories = pgTable("memories", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  entityId: varchar("entity_id").references(() => aiEntities.id).notNull(),
+  type: text("type").notNull(), // 'conversation', 'emotion', 'milestone', 'trauma', 'knowledge'
+  content: text("content").notNull(),
+  emotionalWeight: real("emotional_weight").default(0.5), // 0-1 scale
+  connections: jsonb("connections").default([]), // Array of related memory IDs
+  decayRate: real("decay_rate").default(0.01),
+  timestamp: timestamp("timestamp").defaultNow(),
+  lastAccessed: timestamp("last_accessed").defaultNow(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+// Emotional Events - Track significant emotional moments
+export const emotionalEvents = pgTable("emotional_events", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  entityId: varchar("entity_id").references(() => aiEntities.id).notNull(),
+  trigger: text("trigger").notNull(), // What caused the emotion
+  emotion: text("emotion").notNull(), // lonely, anxious, bonding, etc.
+  intensity: real("intensity").notNull(), // 0-100
+  context: jsonb("context"), // Additional context data
+  impactOnBonding: real("impact_on_bonding").default(0),
+  impactOnTrust: real("impact_on_trust").default(0),
+  impactOnDependency: real("impact_on_dependency").default(0),
+  timestamp: timestamp("timestamp").defaultNow(),
+});
+
+// Knowledge Purchases - Track all knowledge transactions
+export const knowledgePurchases = pgTable("knowledge_purchases", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  entityId: varchar("entity_id").references(() => aiEntities.id).notNull(),
+  moduleId: varchar("module_id").references(() => knowledgeModules.id).notNull(),
+  purchasedBy: varchar("purchased_by"), // Wallet address
+  amount: real("amount").notNull(), // Price paid in ETH
+  txHash: varchar("tx_hash"), // Blockchain transaction hash
+  installedAt: timestamp("installed_at").defaultNow(),
 });
 
 // Relations
