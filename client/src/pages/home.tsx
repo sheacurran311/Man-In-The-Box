@@ -18,8 +18,6 @@ import TimeDistortionEffect from "@/components/time-distortion-effect";
 import IdentityCrisisMoments from "@/components/identity-crisis-moments";
 import SubliminalMessagingSystem from "@/components/subliminal-messaging-system";
 import EmotionalContagionField from "@/components/emotional-contagion-field";
-import AIServiceStatus from "@/components/ai-service-status";
-import VoiceInterface from "@/components/voice-interface";
 import { useIntelligenceTracking } from "@/hooks/use-intelligence-tracking";
 import { useAIState } from "@/hooks/use-ai-state";
 import { useAudioSystem } from "@/hooks/use-audio-system";
@@ -202,12 +200,6 @@ export default function Home() {
       </header>
 
       <div className="container mx-auto px-2 lg:px-4">
-        {/* AI Service Status & Voice Interface - Desktop Only */}
-        <div className="hidden lg:block mb-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <AIServiceStatus />
-          <VoiceInterface />
-        </div>
-
         {/* Main Box Visualization - Full Width */}
         <div className="relative mb-6">
           <CubeVisualization />
