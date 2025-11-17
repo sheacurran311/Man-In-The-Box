@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
-import CubeVisualization from "@/components/cube-visualization";
+import { useState, useEffect, Suspense } from "react";
+import { Scene3D } from "@/components/three/Scene3D";
+import { LoadingFallback } from "@/components/three/LoadingFallback";
 import ChatInterface from "@/components/chat-interface-new";
 import ControlPanel from "@/components/control-panel";
 import KnowledgeStore from "@/components/knowledge-store";
 import DestructionProtocol from "@/components/destruction-protocol";
 import FloatingParticles from "@/components/floating-particles";
 import AudioControls from "@/components/audio-controls";
-import EmotionalOverlay from "@/components/emotional-overlay";
 import BurnSequence from "@/components/burn-sequence";
 import OwnerDashboard from "@/components/owner-dashboard";
 import NeuralActivityVisualizer from "@/components/neural-activity-visualizer";
@@ -200,10 +200,21 @@ export default function Home() {
       </header>
 
       <div className="container mx-auto px-2 lg:px-4">
-        {/* Main Box Visualization - Full Width */}
+        {/* Main 3D Consciousness Visualization - Full Width */}
         <div className="relative mb-6">
-          <CubeVisualization />
-          <EmotionalOverlay emotionalState={entity.emotionalState} />
+          <Suspense fallback={<LoadingFallback />}>
+            <Scene3D
+              emotionalState={{
+                mood: entity.emotionalState?.mood || 'neutral',
+                intensity: entity.emotionalState?.intensity || 30
+              }}
+              consciousnessLevel={consciousnessLevel}
+              bondingLevel={intelligenceState.emotionalIQ.level}
+              isThinking={isTyping}
+              isGlitching={isExperiencingGlitch}
+              isDreaming={isDreaming}
+            />
+          </Suspense>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
